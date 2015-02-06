@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>segmentChoices</key>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>Fine Dining</string>
+			<key>imageName</key>
+			<string>FineDining.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Mid-Scale Dining</string>
+			<key>imageName</key>
+			<string>MidScaleDining.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Casual Dining</string>
+			<key>imageName</key>
+			<string>CasualDining.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Fast Casual</string>
+			<key>imageName</key>
+			<string>FastCasual.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Quick Service</string>
+			<key>imageName</key>
+			<string>QuickService.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Emerging Chains</string>
+			<key>imageName</key>
+			<string>EmergingChains.png</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>macroTrends</key>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>Millenials</string>
+			<key>imageName</key>
+			<string>Millenials.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Health &amp; Wellness</string>
+			<key>imageName</key>
+			<string>Health+Wellness.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Ethnic</string>
+			<key>imageName</key>
+			<string>Ethnic.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Sustainability</string>
+			<key>imageName</key>
+			<string>Sustainability.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Cooming Soon</string>
+			<key>imageName</key>
+			<string>MacroTrendPlaceholder.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Cooming Soon</string>
+			<key>imageName</key>
+			<string>MacroTrendPlaceholder.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Cooming Soon</string>
+			<key>imageName</key>
+			<string>MacroTrendPlaceholder.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Cooming Soon</string>
+			<key>imageName</key>
+			<string>MacroTrendPlaceholder.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Cooming Soon</string>
+			<key>imageName</key>
+			<string>MacroTrendPlaceholder.png</string>
+		</dict>
+	</array>
+</dict>
+</plist>

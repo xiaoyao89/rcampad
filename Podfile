@@ -1,0 +1,10 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+
+pod 'PureLayout'
+pod 'CargoBay'
+pod 'GBVersionTracking'
+pod 'SSZipArchive'
+pod 'vfrReader'
+pod 'ECSlidingViewController'
+pod 'CSStickyHeaderFlowLayout'

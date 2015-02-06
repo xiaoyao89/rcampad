@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>RCAMPad.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>RCAMPadTemplateGenerator.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>96AC2F9D1A439B1500A6BC56</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>96AC2FB51A439B1600A6BC56</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>96BA67FA1A40C5DA00F06EE5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>96BA68131A40C5DA00F06EE5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
