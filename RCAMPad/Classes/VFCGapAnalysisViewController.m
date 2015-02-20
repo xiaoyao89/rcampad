@@ -50,17 +50,13 @@
                  UIView *recipesView = [recipesVC collectionView];
                  
                  [productsView autoPinEdgeToSuperviewEdge:ALEdgeTop];
-                 [productsView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
                  [productsView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
                  
                  [recipesView autoPinEdgeToSuperviewEdge:ALEdgeTop];
-                 [recipesView autoPinEdgeToSuperviewEdge:ALEdgeRight];
                  [recipesView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
                  
-                 [productsView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:recipesView];
-                 [productsView autoMatchDimension:ALDimensionHeight toDimension:ALDimensionHeight ofView:recipesView];
-                 [productsView autoAlignAxis:ALAxisHorizontal toSameAxisOfView:recipesView];
-                 [productsView autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:recipesView];
+                 NSArray *views = @[productsView, recipesView];
+                 [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:60.0 insetSpacing:NO];
              }];
 }
 

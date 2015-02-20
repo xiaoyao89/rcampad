@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #pragma mark - VFCProductsViewController
 

@@ -7,7 +7,7 @@
 //
 
 #import "XSCKit.h"
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #pragma mark - VFCDocument
 
@@ -16,7 +16,6 @@
 extern NSString *const VFCNotificationDidCreateDocument;
 
 typedef NS_ENUM(NSInteger, VFCDocumentStep) {
-    VFCDocumentStepOverview,
     VFCDocumentStepMacroTrend,
     VFCDocumentStepSegmentChoice,
     VFCDocumentStepGapAnaysis,

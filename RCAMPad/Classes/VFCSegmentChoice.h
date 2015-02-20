@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #pragma mark - VFCSegmentChoice
 

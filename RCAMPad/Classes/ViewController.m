@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import "VFCDocument.h"
 #import "VFCDocumentViewController.h"
-#import "VFCDocumentsViewController.h"
 #import "VFCResourcesViewController.h"
 #import "VFCSpeakerNotesViewController.h"
 
@@ -48,13 +47,7 @@
         [[docVC view] addGestureRecognizer:[self panGesture]];
         [self setAnchorRightRevealAmount:320.0];
         [self setAnchorLeftRevealAmount:320.0];
-        
-        NSArray *docs = [VFCDocument documents];
-        VFCDocumentsViewController *docsVC = [[VFCDocumentsViewController alloc] initWithDocuments:docs];
-        UINavigationController *docsNavController = [[UINavigationController alloc] initWithRootViewController:docsVC];
-        [docsNavController setEdgesForExtendedLayout:UIRectEdgeTop|UIRectEdgeBottom|UIRectEdgeLeft];
-        [self setUnderLeftViewController:docsNavController];
-        
+                
         VFCSpeakerNotesViewController *speakerNotesVC = [[VFCSpeakerNotesViewController alloc] init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:speakerNotesVC];
         [navController setEdgesForExtendedLayout:UIRectEdgeTop|UIRectEdgeBottom|UIRectEdgeRight];

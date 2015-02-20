@@ -3,7 +3,7 @@
 //  VFCKit
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #pragma mark - VFCApplicationInformationViewController
 

@@ -12,7 +12,7 @@
 #import "VFCPagesView.h"
 #import "VFCPageView.h"
 #import "VFCSpeakerNotesManager.h"
-#import "PureLayout.h"œ
+#import "PureLayout.h"
 #import "UIColor+VFCAdditions.h"
 
 #pragma mark - VFCHeaderView
@@ -131,7 +131,7 @@ static NSString *const VFCHeaderViewIdentifier = @"VFCHeaderView";
     [layout setMinimumInteritemSpacing:0.0];
     [layout setMinimumLineSpacing:0.0];
     [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    [layout setItemSize:CGSizeMake(1024.0/3.0, 309.0)];
+    [layout setItemSize:CGSizeMake(1024.0/2.0, 309.0)];
     self = [super initWithCollectionViewLayout:layout];
     if (self) {
         [self setMacroTrends:macroTrends];

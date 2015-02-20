@@ -223,10 +223,6 @@ NSString *const VFCNotificationDidCreateDocument = @"VFCNotificationDidCreateDoc
     
     NSInteger step = [[self step] integerValue];
     
-    if (step >= VFCDocumentStepOverview) {
-        [crumbTrails addObject:([[self title] length] > 0) ? [self title] : @"Overview"];
-    }
-    
     if (step >= VFCDocumentStepMacroTrend) {
         if (step == VFCDocumentStepMacroTrend) {
             [crumbTrails addObject:([[self macroTrend] length] > 0) ? [self macroTrend] : @"Select a macro trend"];

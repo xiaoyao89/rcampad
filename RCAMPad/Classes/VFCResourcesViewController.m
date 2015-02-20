@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
 //
 
-#import <MessageUI/MessageUI.h>
+@import MessageUI;
 #import "ReaderViewController.h"
 #import "ReaderDocument.h"
 #import "VFCResourcesViewController.h"

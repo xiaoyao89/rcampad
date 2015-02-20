@@ -1,31 +1,31 @@
 PODS:
-  - AFNetworking (2.5.0):
-    - AFNetworking/NSURLConnection (= 2.5.0)
-    - AFNetworking/NSURLSession (= 2.5.0)
-    - AFNetworking/Reachability (= 2.5.0)
-    - AFNetworking/Security (= 2.5.0)
-    - AFNetworking/Serialization (= 2.5.0)
-    - AFNetworking/UIKit (= 2.5.0)
-  - AFNetworking/NSURLConnection (2.5.0):
+  - AFNetworking (2.5.1):
+    - AFNetworking/NSURLConnection (= 2.5.1)
+    - AFNetworking/NSURLSession (= 2.5.1)
+    - AFNetworking/Reachability (= 2.5.1)
+    - AFNetworking/Security (= 2.5.1)
+    - AFNetworking/Serialization (= 2.5.1)
+    - AFNetworking/UIKit (= 2.5.1)
+  - AFNetworking/NSURLConnection (2.5.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.0):
+  - AFNetworking/NSURLSession (2.5.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.0)
-  - AFNetworking/Security (2.5.0)
-  - AFNetworking/Serialization (2.5.0)
-  - AFNetworking/UIKit (2.5.0):
+  - AFNetworking/Reachability (2.5.1)
+  - AFNetworking/Security (2.5.1)
+  - AFNetworking/Serialization (2.5.1)
+  - AFNetworking/UIKit (2.5.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - CargoBay (2.1.0):
     - AFNetworking (~> 2.2)
   - CSStickyHeaderFlowLayout (0.2.3)
   - ECSlidingViewController (2.0.3)
-  - GBVersionTracking (1.2.0)
-  - PureLayout (2.0.4)
+  - GBVersionTracking (1.3.0)
+  - PureLayout (2.0.5)
   - SSZipArchive (0.3.2)
   - vfrReader (2.7.3)
 
@@ -39,12 +39,12 @@ DEPENDENCIES:
   - vfrReader
 
 SPEC CHECKSUMS:
-  AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
+  AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
   CargoBay: b9b7c2b6a466192fb218935c0dd771d16268a035
   CSStickyHeaderFlowLayout: c5595da1cf91cce22aca70c44ab80b59247c723c
   ECSlidingViewController: e79fe856bfb1a99a39c995377a1943e50f7647eb
-  GBVersionTracking: 4e1004f12dadb9e2aedfe99e8d4ee591596f720f
-  PureLayout: ddf4fedf7e2f5984f972bbd2205dda4fc3418347
+  GBVersionTracking: 2cf8159f872b55e4a1d2ba8da3ce3c2d060f56c2
+  PureLayout: 63a3257320223e8edddcd3afb407445f85a6bf74
   SSZipArchive: 11299a4e89821bd4085b12f25edaa85853e0051c
   vfrReader: 79d5b7993d2f5a7a34ba5e1a590cebdba0c8350e
 

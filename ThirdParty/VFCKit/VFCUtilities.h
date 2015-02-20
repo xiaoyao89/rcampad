@@ -3,7 +3,7 @@
 //  VFCKit
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 // Comment this line if you want to disable logging.
 //#warning Comment when releasing

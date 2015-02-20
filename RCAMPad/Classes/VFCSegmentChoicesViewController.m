@@ -130,7 +130,7 @@ static NSString *const VFCSegmentChoiceHeaderViewIdentifier = @"VFCSegmentChoice
     [layout setMinimumInteritemSpacing:0.0];
     [layout setMinimumLineSpacing:0.0];
     [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    [layout setItemSize:CGSizeMake(1024.0/3.0, 309.0)];
+    [layout setItemSize:CGSizeMake(1024.0/2.0, 309.0)];
     self = [super initWithCollectionViewLayout:layout];
     if (self) {
         [self setSegmentChoices:segmentChoices];

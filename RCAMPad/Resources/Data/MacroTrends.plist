@@ -28,36 +28,6 @@
 			<key>imageName</key>
 			<string>Sustainability.png</string>
 		</dict>
-		<dict>
-			<key>title</key>
-			<string>Cooming Soon</string>
-			<key>imageName</key>
-			<string>MacroTrendPlaceholder.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Cooming Soon</string>
-			<key>imageName</key>
-			<string>MacroTrendPlaceholder.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Cooming Soon</string>
-			<key>imageName</key>
-			<string>MacroTrendPlaceholder.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Cooming Soon</string>
-			<key>imageName</key>
-			<string>MacroTrendPlaceholder.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Cooming Soon</string>
-			<key>imageName</key>
-			<string>MacroTrendPlaceholder.png</string>
-		</dict>
 	</array>
 </dict>
 </plist>

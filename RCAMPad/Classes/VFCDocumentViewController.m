@@ -11,11 +11,9 @@
 #import "VFCDeepDiveViewController.h"
 #import "VFCDocument.h"
 #import "VFCDocumentHeaderView.h"
-#import "VFCDocumentsViewController.h"
 #import "VFCGapAnalysisViewController.h"
 #import "VFCMacroTrend.h"
 #import "VFCMacroTrendsViewController.h"
-#import "VFCOverviewViewController.h"
 #import "VFCSegmentButton.h"
 #import "VFCSegmentChoice.h"
 #import "VFCSegmentChoicesViewController.h"
@@ -27,7 +25,7 @@
 
 #pragma mark - Private Interface
 
-@interface VFCDocumentViewController () <VFCDocumentsViewControllerDelegate, VFCDocumentHeaderViewDelegate, VFCMacroTrendsViewControllerDelegate, VFCSegmentChoicesViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface VFCDocumentViewController () <VFCDocumentHeaderViewDelegate, VFCMacroTrendsViewControllerDelegate, VFCSegmentChoicesViewControllerDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, strong, readwrite) VFCDocument *document;
 @property (nonatomic, strong, readwrite) VFCMacroTrendsViewController *macroTrendsViewController;
 @property (nonatomic, strong, readwrite) VFCDocumentHeaderView *headerView;
@@ -99,8 +97,9 @@
     [self setPageViewController:pageViewController];
     [self addChildViewController:pageViewController];
     
-    VFCOverviewViewController *overviewVC = [[VFCOverviewViewController alloc] init];
-    [pageViewController setViewControllers:@[overviewVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    NSArray *macroTrends = [VFCMacroTrend macroTrends];
+    VFCMacroTrendsViewController *trendsVC = [[VFCMacroTrendsViewController alloc] initWithMacroTrends:macroTrends];
+    [pageViewController setViewControllers:@[trendsVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
     UIView *contentView = [pageViewController view];
     [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -118,24 +117,6 @@
 
 - (void)documentHeaderView:(VFCDocumentHeaderView *)documentHeaderView didSelectButtonAtIndex:(NSInteger)index {
     [self showStep:index animated:YES check:YES];
-}
-
-#pragma mark VFCDocumentsViewControllerDelegate
-
-- (void)documentsViewController:(VFCDocumentsViewController *)documentsViewController didAddDocument:(VFCDocument *)document {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)documentsViewController:(VFCDocumentsViewController *)documentsViewController didSelectDocument:(VFCDocument *)document {
-    [self setDocument:document];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)documentsViewController:(VFCDocumentsViewController *)documentsViewController didRemoveDocument:(VFCDocument *)document {
-    if ([document isEqual:[self document]]) {
-        [self setDocument:nil];
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark VFCMacroTrendsViewControllerDelegate
@@ -206,10 +187,6 @@
 
     UIViewController *vc = nil;
     switch (step) {
-        case VFCDocumentStepOverview: {
-            vc = [[VFCOverviewViewController alloc] init];
-            break;
-        }
         case VFCDocumentStepMacroTrend: {
             vc = [[VFCMacroTrendsViewController alloc] initWithMacroTrends:[VFCMacroTrend macroTrends]];
             [(VFCMacroTrendsViewController *)vc setMacroTrendsViewControllerDelegate:self];

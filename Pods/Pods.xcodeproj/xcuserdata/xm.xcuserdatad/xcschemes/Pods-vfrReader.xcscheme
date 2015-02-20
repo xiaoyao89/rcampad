@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0145BE407FA3802C8C92AC95"
+               BlueprintIdentifier = "91B81F321F66DACD467266FE"
                BuildableName = "libPods-vfrReader.a"
                BlueprintName = "Pods-vfrReader"
                ReferencedContainer = "container:Pods.xcodeproj">

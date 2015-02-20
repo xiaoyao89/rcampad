@@ -74,7 +74,7 @@ static NSString * const VFCRecipeCellIdentifier = @"VFCRecipeCell";
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     [layout setMinimumInteritemSpacing:0.0];
     [layout setMinimumLineSpacing:0.0];
-    [layout setItemSize:CGSizeMake(256.0, 256.0)];
+    [layout setItemSize:CGSizeMake(236.0, 236.0)];
     UIEdgeInsets insets = UIEdgeInsetsZero;
     insets.top = 15.0;
     [layout setSectionInset:insets];

@@ -84,9 +84,9 @@
         
         NSMutableArray *buttons = [NSMutableArray array];
         
-        NSArray *imageIDs = @[@"MacroTrend", @"MacroTrend", @"SegmentChoice", @"SuggestedSolution", @"SuggestedSolution"];
-        NSArray *imageNames = @[@"MacroTrend", @"MacroTrend", @"SegmentChoice", @"SuggestedSolution", @"SuggestedSolution"];
-        NSArray *textStrings = @[@"OVERVIEW", @"MACRO TREND", @"SEGMENT CHOICE", @"GAP ANALYSIS", @"SOLUTION"];
+        NSArray *imageIDs = @[@"MacroTrend", @"SegmentChoice", @"SuggestedSolution", @"SuggestedSolution"];
+        NSArray *imageNames = @[@"MacroTrend", @"SegmentChoice", @"SuggestedSolution", @"SuggestedSolution"];
+        NSArray *textStrings = @[@"MACRO TREND", @"SEGMENT CHOICE", @"GAP ANALYSIS", @"SOLUTION"];
         NSInteger count = [imageIDs count];
         for (NSInteger i=0; i<count; i++) {
             VFCSegmentButton *button = [VFCSegmentButton newAutoLayoutView];

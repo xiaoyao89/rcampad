@@ -16,7 +16,6 @@
 
 @interface VFCSpeakerNotesViewController()
 @property (nonatomic, strong, readwrite) UITextView *textView;
-@property (nonatomic, strong, readwrite) AVSpeechSynthesizer *speechSynthesizer;
 @end
 
 #pragma mark - Public Implementation
@@ -42,15 +41,6 @@
     [self setTextView:textView];
     
     [self setTitle:@"Speaker Notes"];
-    
-    AVSpeechSynthesizer *speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
-    [self setSpeechSynthesizer:speechSynthesizer];
-    
-    UIBarButtonItem *speakerItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Volume"]
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(speakNotes:)];
-    [[self navigationItem] setRightBarButtonItem:speakerItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,12 +53,6 @@
 
 - (void)dismiss {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)speakNotes:(UIBarButtonItem *)item {
-    //AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:[[self textView] text]];
-    //[utterance setRate:0.25];
-    //[[self speechSynthesizer] speakUtterance:utterance];
 }
 
 @end
