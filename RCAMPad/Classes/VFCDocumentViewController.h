@@ -2,17 +2,16 @@
 //  VFCDocumentViewController.h
 //  RCAMPad
 //
-//  Created by Xiao Yao
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
 @import UIKit;
+#import "VFCKit.h"
+
 @class VFCDocument;
 
 #pragma mark - VFCDocumentViewController
 
 #pragma mark - Public Interface
 
-@interface VFCDocumentViewController : UIPageViewController
+@interface VFCDocumentViewController : UIViewController
 - (instancetype)initWithDocument:(VFCDocument *)document;
 @end

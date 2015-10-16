@@ -2,9 +2,6 @@
 //  ViewController.h
 //  RCAMPad
 //
-//  Created by Xiao Yao
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
 @import UIKit;
 #import "ECSlidingViewController.h"

@@ -2,13 +2,9 @@
 //  VFCCrumbTrailView.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 12/19/14.
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCCrumbTrailView.h"
 #import "PureLayout.h"
-#import "UIColor+VFCAdditions.h"
 
 #pragma mark - VFCCrumbTrailCarat
 
@@ -31,7 +27,7 @@
     point = CGPointZero;
     CGContextAddLineToPoint(context, point.x, point.y);
     
-    [[UIColor venturaBlueColor] setFill];
+    [[UIColor venturaFoodsBlueColor] setFill];
     CGContextFillPath(context);
 }
 

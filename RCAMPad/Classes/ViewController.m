@@ -2,9 +2,6 @@
 //  ViewController.m
 //  RCAMPad
 //
-//  Created by Xiao Yao
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "ViewController.h"
 #import "VFCDocument.h"
@@ -25,22 +22,8 @@
 
 #pragma mark Initialization
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    return [self init];
-}
-
 - (instancetype)init {
-    VFCDocument *doc = [VFCDocument previousDocument];
-    if (!doc) {
-        NSArray *docs = [VFCDocument documents];
-        if ([docs count] == 0) {
-            doc = [VFCDocument document];
-            [doc openWithCompletionHandler:nil];
-        } else {
-            doc = [docs firstObject];
-        }
-        [VFCDocument saveAsPreviousDocument:doc];
-    }
+    VFCDocument *doc = [[VFCDocument alloc] init];
     VFCDocumentViewController *docVC = [[VFCDocumentViewController alloc] initWithDocument:doc];
     self = [super initWithTopViewController:docVC];
     if (self) {

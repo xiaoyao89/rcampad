@@ -23,7 +23,11 @@ it simply add the following line to your Podfile:
 Alternatively, you can just drag the files from `CSStickyHeaderFlowLayout / Classes` into your own project.
 
 
-## Usage
+## Usage (Swift/Code)
+
+Documentation is coming soon. For now please open `CSStickyHeaderFlowLayout.xcworkspace` > `SwiftDemo` target.
+
+## Usage (CocoaPods/Objective-C/Storyboard)
 
 To run the example project; clone the repo, and run `pod install` from the Project directory first.
 
@@ -120,6 +124,18 @@ If you think this worths something, tip me a cup of coffee! (p.s. was trying out
 
 
 ## Updates
+
+- 0.2.9: Remove Supplementry Header Layout Attribute to prevent crash when returning nil and while is CGSizeZero
+
+- 0.2.8: Fixed a visual issue when animating contentInsets #85 and crash when dragging cells #69
+
+- 0.2.7: Fixed scroll indicator covered by cell
+
+- 0.2.6: Fixing that section header being covered by cell after perform batch update
+
+- 0.2.5: Fixing a crash when quickly popping back to a view controller using the parallax header
+
+- 0.2.4: Possibly fix for a crash when parallaxHeaderReferenceSize is changed
 
 - 0.2.3: Enabled iPhone 6 screen sizes, reverted a patch and fixed a visual bug and content tapping bug.
 

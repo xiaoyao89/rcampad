@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<array>
+	<dict>
+		<key>text</key>
+		<string>Using I to I is simple. Let&apos;s get started.</string>
+		<key>imageName</key>
+		<string>Tutorial1</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Tap on the buttons in the top area to navigate between different parts of the application.</string>
+		<key>imageName</key>
+		<string>Tutorial2</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>To toggle the speaker notes, drag your finger horizontally in this area.</string>
+		<key>imageName</key>
+		<string>Tutorial3</string>
+	</dict>
+</array>
 </plist>

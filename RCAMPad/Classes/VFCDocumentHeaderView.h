@@ -2,11 +2,10 @@
 //  VFCDocumentHeaderView.h
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 12/18/14.
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
 @import UIKit;
+#import "VFCKit.h"
+
 @class VFCCrumbTrailView;
 @class VFCDocumentHeaderView;
 @class VFCSegmentButton;
@@ -24,9 +23,15 @@
 
 #pragma mark - Public Interface
 
+extern NSString *const VFCDocumentHeaderViewShowNextButton;
+extern NSString *const VFCDocumentheaderViewHideNextButton;
+
 @interface VFCDocumentHeaderView : UIView
 @property (nonatomic, weak, readwrite) id<VFCDocumentHeaderViewDelegate> delegate;
 @property (nonatomic, strong, readonly) UIButton *informationButton;
 @property (nonatomic, strong, readonly) VFCCrumbTrailView *crumbTrailView;
+@property (nonatomic, strong, readonly) UIButton *nextButton;
+@property (nonatomic, strong, readonly) UIButton *continueButton;
+- (void)moveCaratToPoint:(CGPoint)point;
 - (void)moveCaratToIndex:(NSInteger)index;
 @end

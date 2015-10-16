@@ -2,13 +2,9 @@
 //  VFCDocumentViewController.m
 //  RCAMPad
 //
-//  Created by Xiao Yao
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCDocumentViewController.h"
 #import "VFCCrumbTrailView.h"
-#import "VFCDeepDiveViewController.h"
 #import "VFCDocument.h"
 #import "VFCDocumentHeaderView.h"
 #import "VFCGapAnalysisViewController.h"
@@ -19,7 +15,6 @@
 #import "VFCSegmentChoicesViewController.h"
 #import "VFCSolutionViewController.h"
 #import "PureLayout.h"
-#import "VFCApplicationInformationViewController.h"
 
 #pragma mark - VFCDocumentViewController
 
@@ -31,6 +26,7 @@
 @property (nonatomic, strong, readwrite) VFCDocumentHeaderView *headerView;
 @property (nonatomic, strong, readwrite) UIView *contentView;
 @property (nonatomic, strong, readwrite) UIPageViewController *pageViewController;
+@property (nonatomic, strong, readwrite) UIViewController *currentViewController;
 @end
 
 #pragma mark - Public Implementation
@@ -42,7 +38,7 @@
 - (instancetype)initWithDocument:(VFCDocument *)document {
     self = [super init];
     if (self) {
-        [self setDocument:document];
+        _document = document;
     }
     return self;
 }
@@ -68,6 +64,12 @@
     [headerView autoPinEdgeToSuperviewEdge:ALEdgeTop];
     [headerView autoSetDimension:ALDimensionHeight toSize:150.0];
     [headerView setClipsToBounds:NO];
+    
+    [[headerView nextButton] addTarget:self action:@selector(continueToNextStep:) forControlEvents:UIControlEventTouchUpInside];
+    [[headerView nextButton] setTag:[[[self document] step] integerValue]];
+    
+    [[headerView continueButton] addTarget:self action:@selector(continueToNextStep:) forControlEvents:UIControlEventTouchUpInside];
+    [[headerView continueButton] setTag:[[[self document] step] integerValue]];
     
     CALayer *layer = [headerView layer];
     [layer setShadowColor:[[UIColor whiteColor] CGColor]];
@@ -97,20 +99,27 @@
     [self setPageViewController:pageViewController];
     [self addChildViewController:pageViewController];
     
-    NSArray *macroTrends = [VFCMacroTrend macroTrends];
-    VFCMacroTrendsViewController *trendsVC = [[VFCMacroTrendsViewController alloc] initWithMacroTrends:macroTrends];
-    [pageViewController setViewControllers:@[trendsVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
     UIView *contentView = [pageViewController view];
     [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [contentView setBackgroundColor:[UIColor whiteColor]];
     [[self contentView] addSubview:contentView];
-    [UIView autoSetPriority:999.0
+    [NSLayoutConstraint autoSetPriority:999.0
              forConstraints:^{
                  [contentView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
              }];
-    
-    [[self headerView] moveCaratToIndex:[[[self document] step] integerValue]];
+        
+    VFCMacroTrendsViewController *macroTrendsVC = [[VFCMacroTrendsViewController alloc] initWithMacroTrends:[VFCMacroTrend macroTrends]];
+    [macroTrendsVC setMacroTrendsViewControllerDelegate:self];
+    [pageViewController setViewControllers:@[macroTrendsVC]
+                                 direction:UIPageViewControllerNavigationDirectionForward
+                                  animated:NO
+                                completion:nil];
+    self.currentViewController = macroTrendsVC;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.headerView moveCaratToPoint:CGPointMake(399.0, 0.0)];
 }
 
 #pragma mark VFCDocumentHeaderViewDelegate
@@ -122,15 +131,9 @@
 #pragma mark VFCMacroTrendsViewControllerDelegate
 
 - (void)macroTrendsViewController:(VFCMacroTrendsViewController *)macroTrendsViewController didSelectMacroTrend:(VFCMacroTrend *)macroTrend {
-    [[self document] setMacroTrend:[macroTrend title] ? [macroTrend title] : @""];
-    NSArray *crumbTrails = [[self document] uppercaseCrumbTrails];
-    [[[self headerView] crumbTrailView] updateComponents:crumbTrails];
-}
-
-- (void)macroTrendsViewControllerDidSelectInfoButton:(VFCMacroTrendsViewController *)macroTrendsViewController {
-    VFCDeepDiveViewController *deepDiveVC = [[VFCDeepDiveViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:deepDiveVC];
-    [self presentViewController:navController animated:YES completion:nil];
+    self.document.macroTrend = macroTrend.title ? macroTrend.title : @"";
+    NSArray *crumbTrails = [self.document uppercaseCrumbTrails];
+    [[self.headerView crumbTrailView] updateComponents:crumbTrails];
 }
 
 #pragma mark VFCSegmentChoicesViewControllerDelegate
@@ -139,12 +142,6 @@
     [[self document] setSegmentChoice:[segmentChoice title] ? [segmentChoice title] : @""];
     NSArray *crumbTrails = [[self document] uppercaseCrumbTrails];
     [[[self headerView] crumbTrailView] updateComponents:crumbTrails];
-}
-
-- (void)segmentChoicesViewControllerDidSelectInfoButton:(VFCSegmentChoicesViewController *)segmentChoicesViewController {
-    VFCDeepDiveViewController *deepDiveVC = [[VFCDeepDiveViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:deepDiveVC];
-    [self presentViewController:navController animated:YES completion:nil];
 }
 
 #pragma mark UIGestureRecognizerDelegate
@@ -174,7 +171,13 @@
 - (void)showStep:(NSInteger)step animated:(BOOL)animated check:(BOOL)check {
     if (check) {
         NSInteger currentStep = [[[self document] step] integerValue];
-        if (step != currentStep) {
+        if (step == currentStep) {
+            if ([self.currentViewController isKindOfClass:[VFCMacroTrendsViewController class]]) {
+                [(VFCMacroTrendsViewController *)self.currentViewController hideHeader];
+            } else if ([self.currentViewController isKindOfClass:[VFCSegmentChoicesViewController class]]) {
+                [(VFCSegmentChoicesViewController *)self.currentViewController hideHeader];
+            }
+        } else {
             [self showStep:step animated:animated];
         }
     } else {
@@ -183,41 +186,55 @@
 }
 
 - (void)showStep:(NSInteger)step animated:(BOOL)animated {
-    [[self document] setStep:@(step)];
+    if (step >= VFCDocumentStepMacroTrend && step <= VFCDocumentStepSolution) {
+        [[self document] setStep:@(step)];
+        [[[self headerView] nextButton] setTag:step];
+        [[[self headerView] continueButton] setTag:step];
+        
+        UIViewController *vc = nil;
+        switch (step) {
+            case VFCDocumentStepMacroTrend: {
+                vc = [[VFCMacroTrendsViewController alloc] initWithMacroTrends:[VFCMacroTrend macroTrends]];
+                [(VFCMacroTrendsViewController *)vc setMacroTrendsViewControllerDelegate:self];
+                break;
+            }
+            case VFCDocumentStepSegmentChoice: {
+                vc = [[VFCSegmentChoicesViewController alloc] initWithSegmentChoices:[VFCSegmentChoice segmentChoices]];
+                [(VFCSegmentChoicesViewController *)vc setSegmentChoicesViewControllerDelegate:self];
+                break;
+            }
+            case VFCDocumentStepGapAnaysis: {
+                vc = [[VFCGapAnalysisViewController alloc] init];
+                break;
+            }
+            case VFCDocumentStepSolution: {
+                vc = [[VFCSolutionViewController alloc] initWithDocument:self.document];
+                break;
+            }
+        }
+                
+        [[self headerView] moveCaratToIndex:step];
+        NSArray *crumbTrails = [[self document] uppercaseCrumbTrails];
+        [[[self headerView] crumbTrailView] updateComponents:crumbTrails];
+        
+        if (vc) {
+            self.currentViewController = vc;
+            NSInteger currentStep = [[[self document] step] integerValue];
+            [[self pageViewController] setViewControllers:@[vc]
+                                                direction:(currentStep < step) ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse
+                                                 animated:animated
+                                               completion:nil];
+        }
+    }
+}
 
-    UIViewController *vc = nil;
-    switch (step) {
-        case VFCDocumentStepMacroTrend: {
-            vc = [[VFCMacroTrendsViewController alloc] initWithMacroTrends:[VFCMacroTrend macroTrends]];
-            [(VFCMacroTrendsViewController *)vc setMacroTrendsViewControllerDelegate:self];
-            break;
-        }
-        case VFCDocumentStepSegmentChoice: {
-            vc = [[VFCSegmentChoicesViewController alloc] initWithSegmentChoices:[VFCSegmentChoice segmentChoices]];
-            [(VFCSegmentChoicesViewController *)vc setSegmentChoicesViewControllerDelegate:self];
-            break;
-        }
-        case VFCDocumentStepGapAnaysis: {
-            vc = [[VFCGapAnalysisViewController alloc] init];
-            break;
-        }
-        case VFCDocumentStepSolution: {
-            vc = [[VFCSolutionViewController alloc] init];
-            break;
-        }
+- (void)continueToNextStep:(UIButton *)button {
+    VFCDocumentStep step = [button tag];
+    VFCDocumentStep nextStep = step+1;
+    if (nextStep < VFCDocumentStepGapAnaysis || nextStep == VFCDocumentStepSolution) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:VFCDocumentheaderViewHideNextButton object:nil];
     }
-    
-    NSArray *crumbTrails = [[self document] uppercaseCrumbTrails];
-    [[[self headerView] crumbTrailView] updateComponents:crumbTrails];
-    [[self headerView] moveCaratToIndex:step];
-    
-    if (vc) {
-        NSInteger currentStep = [[[self document] step] integerValue];
-        [[self pageViewController] setViewControllers:@[vc]
-                                            direction:(currentStep < step) ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse
-                                             animated:animated
-                                           completion:nil];
-    }
+    [self showStep:step+1 animated:YES];
 }
 
 @end

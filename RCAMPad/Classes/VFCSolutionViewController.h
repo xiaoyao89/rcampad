@@ -2,16 +2,16 @@
 //  VFCSolutionViewController.h
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 1/30/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 @import UIKit;
+#import "VFCKit.h"
+
+@class VFCDocument;
 
 #pragma mark - VFCSolutionViewController
 
 #pragma mark - Public Interface
 
-@interface VFCSolutionViewController : UIViewController
-
+@interface VFCSolutionViewController : UITableViewController
+- (instancetype)initWithDocument:(VFCDocument *)document NS_DESIGNATED_INITIALIZER;
 @end

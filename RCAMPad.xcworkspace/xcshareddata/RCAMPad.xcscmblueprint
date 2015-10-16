@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "04547616071782B7486202CD7579B7F3F8151037",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "04547616071782B7486202CD7579B7F3F8151037" : 0,
+    "38168FD8D64C056B0C48602CDC978DC42A329C63" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "02866223-5250-4C64-B36B-87D1640DF334",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "04547616071782B7486202CD7579B7F3F8151037" : "RCAM",
+    "38168FD8D64C056B0C48602CDC978DC42A329C63" : "VFCKit"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "RCAMPad",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "RCAMPad.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/xceleratemedia\/rcam.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "04547616071782B7486202CD7579B7F3F8151037"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:xceleratemedia\/vfckit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "38168FD8D64C056B0C48602CDC978DC42A329C63"
+    }
+  ]
+}

@@ -7,26 +7,88 @@
 		<dict>
 			<key>title</key>
 			<string>Millenials</string>
+			<key>identifier</key>
+			<string>Millenials</string>
 			<key>imageName</key>
 			<string>Millenials.png</string>
+			<key>pages</key>
+			<array>
+				<dict>
+					<key>imageName</key>
+					<string>Millenials1.png</string>
+					<key>deepDive</key>
+					<array>
+						<string>Millenials1DeepDive1.png</string>
+						<string>Millenials1DeepDive2.png</string>
+					</array>
+				</dict>
+				<dict>
+					<key>imageName</key>
+					<string>Millenials2.png</string>
+					<key>deepDive</key>
+					<array>
+						<string>Millenials2DeepDive1.png</string>
+						<string>Millenials2DeepDive2.png</string>
+					</array>
+				</dict>
+				<dict>
+					<key>imageName</key>
+					<string>Millenials3.png</string>
+					<key>deepDive</key>
+					<array>
+						<string>Millenials3DeepDive1.png</string>
+						<string>Millenials3DeepDive2.png</string>
+					</array>
+				</dict>
+				<dict>
+					<key>imageName</key>
+					<string>Millenials4.png</string>
+					<key>deepDive</key>
+					<array>
+						<string>Millenials4DeepDive1.png</string>
+						<string>Millenials4DeepDive2.png</string>
+						<string>Millenials4DeepDive3.png</string>
+					</array>
+				</dict>
+				<dict>
+					<key>imageName</key>
+					<string>Millenials5.png</string>
+					<key>deepDive</key>
+					<array>
+						<string>Millenials5DeepDive1.png</string>
+					</array>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>Health &amp; Wellness</string>
+			<key>identifier</key>
+			<string>HealthWellness</string>
 			<key>imageName</key>
 			<string>Health+Wellness.png</string>
+			<key>pages</key>
+			<array/>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>Ethnic</string>
+			<key>identifier</key>
+			<string>Ethnic</string>
 			<key>imageName</key>
 			<string>Ethnic.png</string>
+			<key>pages</key>
+			<array/>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>Sustainability</string>
+			<key>identifier</key>
+			<string>Sustainability</string>
 			<key>imageName</key>
 			<string>Sustainability.png</string>
+			<key>pages</key>
+			<array/>
 		</dict>
 	</array>
 </dict>

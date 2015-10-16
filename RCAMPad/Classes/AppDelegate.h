@@ -2,11 +2,9 @@
 //  AppDelegate.h
 //  RCAMPad
 //
-//  Created by Xiao Yao
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+#import "VFCKit.h"
 
 #pragma mark - AppDelegate
 

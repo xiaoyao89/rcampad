@@ -2,9 +2,6 @@
 //  VFCSegmentChoice.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 1/20/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCSegmentChoice.h"
 
@@ -22,8 +19,8 @@
     NSMutableArray *choices = [NSMutableArray array];
     for (NSDictionary *choiceDict in choiceDicts) {
         VFCSegmentChoice *choice = [[VFCSegmentChoice alloc] init];
-        [choice setTitle:[choiceDict objectForKey:@"title"]];
-        [choice setImageName:[choiceDict objectForKey:@"imageName"]];
+        choice.title = [choiceDict objectForKey:@"title"];
+        choice.imageName = [choiceDict objectForKey:@"imageName"];
         [choices addObject:choice];
     }
     return [NSArray arrayWithArray:choices];

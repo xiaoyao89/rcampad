@@ -2,9 +2,6 @@
 //  VFCProductsViewController.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 2/2/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCProductsViewController.h"
 #import "PureLayout.h"
@@ -36,19 +33,19 @@
         [[self contentView] addSubview:label];
         [self setLabel:label];
         
-        [UIView autoSetPriority:999.0
-                 forConstraints:^{
-                     [imageView autoPinEdgeToSuperviewEdge:ALEdgeTop];
-                     [imageView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
-                     [imageView autoPinEdgeToSuperviewEdge:ALEdgeRight];
-                     
-                     [label autoPinEdgeToSuperviewEdge:ALEdgeLeft];
-                     [label autoPinEdgeToSuperviewEdge:ALEdgeRight];
-                     [label autoPinEdgeToSuperviewEdge:ALEdgeBottom];
-                     [label autoSetDimension:ALDimensionHeight toSize:40.0];
-                     
-                     [imageView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:label];
-                 }];
+        [NSLayoutConstraint autoSetPriority:999.0
+                             forConstraints:^{
+                                 [imageView autoPinEdgeToSuperviewEdge:ALEdgeTop];
+                                 [imageView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+                                 [imageView autoPinEdgeToSuperviewEdge:ALEdgeRight];
+                                 
+                                 [label autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+                                 [label autoPinEdgeToSuperviewEdge:ALEdgeRight];
+                                 [label autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+                                 [label autoSetDimension:ALDimensionHeight toSize:40.0];
+                                 
+                                 [imageView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:label];
+                             }];
     }
     return self;
 }
@@ -96,7 +93,6 @@ static NSString * const VFCProductCellIdentifier = @"VFCProductCell";
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 10;

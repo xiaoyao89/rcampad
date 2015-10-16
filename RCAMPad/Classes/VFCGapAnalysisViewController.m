@@ -2,247 +2,124 @@
 //  VFCGapAnalysisViewController.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 1/30/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCGapAnalysisViewController.h"
 #import "VFCProductsViewController.h"
 #import "VFCRecipesViewController.h"
 #import "PureLayout.h"
-#import "UIColor+VFCAdditions.h"
 
-#pragma mark - VFCGapAnalysisItemsViewController
+#pragma mark - Resource
 
 #pragma mark - Private Interface
 
-@interface VFCGapAnalysisItemsViewController : UIViewController
+@interface Resource : NSObject
+@property (nonatomic, copy, readwrite) NSString *filename;
+@end
 
+#pragma mark - Private Interface
+
+@implementation Resource
+@end
+
+#pragma mark - ResourceCell
+
+#pragma mark - Public Interface
+
+static void *ResourceCellFrameContext = &ResourceCellFrameContext;
+
+typedef NS_ENUM(NSInteger, ResourceCellState) {
+    ResourceCellStateNone,
+    ResourceCellStateSelected,
+    ResourceCellStateInclude,
+};
+
+@interface ResourceCell : UITableViewCell
+@property (nonatomic, strong, readwrite) UIImageView *resourceImageView;
+@property (nonatomic, strong, readwrite) UILabel *resourceLabel;
+@property (nonatomic, assign, getter=isTracking) BOOL tracking;
+@property (nonatomic, assign, readwrite) ResourceCellState state;
+@property (nonatomic, strong, readwrite) UIColor *highlightColor;
 @end
 
 #pragma mark - Private Implementation
 
-@implementation VFCGapAnalysisItemsViewController
+@implementation ResourceCell
 
-#pragma mark View Lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [[self view] setBackgroundColor:[UIColor whiteColor]];
-    
-    VFCProductsViewController *productsVC = [[VFCProductsViewController alloc] init];
-    [[productsVC collectionView] setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [[productsVC collectionView] setShowsVerticalScrollIndicator:NO];
-    [self addChildViewController:productsVC];
-    [[self view] addSubview:[productsVC collectionView]];
-    [[productsVC collectionView] setBackgroundColor:[UIColor clearColor]];
-    
-    VFCRecipesViewController *recipesVC = [[VFCRecipesViewController alloc] init];
-    [[recipesVC collectionView] setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [[recipesVC collectionView] setShowsVerticalScrollIndicator:NO];
-    [self addChildViewController:recipesVC];
-    [[self view] addSubview:[recipesVC collectionView]];
-    [[recipesVC collectionView] setBackgroundColor:[UIColor clearColor]];
-    
-    [UIView autoSetPriority:999.0
-             forConstraints:^{
-                 UIView *productsView = [productsVC collectionView];
-                 UIView *recipesView = [recipesVC collectionView];
-                 
-                 [productsView autoPinEdgeToSuperviewEdge:ALEdgeTop];
-                 [productsView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
-                 
-                 [recipesView autoPinEdgeToSuperviewEdge:ALEdgeTop];
-                 [recipesView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
-                 
-                 NSArray *views = @[productsView, recipesView];
-                 [views autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:60.0 insetSpacing:NO];
-             }];
-}
-
-@end
-
-#pragma mark - VFCTagSection
-
-#pragma mark - Private Interface
-
-@interface VFCTagSection : NSObject
-@property (nonatomic, copy, readwrite) NSString *title;
-@property (nonatomic, strong, readwrite) NSArray *tags;
-@end
-
-#pragma mark - Private Implementation
-
-@implementation VFCTagSection
-@end
-
-#pragma mark - VFCTagHeaderView
-
-#pragma mark - Private Interface
-
-@interface VFCTagHeaderView : UITableViewHeaderFooterView
-@property (nonatomic, strong, readwrite) UILabel *label;
-@end
-
-#pragma mark - Private Implementation
-
-@implementation VFCTagHeaderView
-
-#pragma mark Initialization
-
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithReuseIdentifier:reuseIdentifier];
-    if (self) {
-        UILabel *label = [UILabel newAutoLayoutView];
-        [label setBackgroundColor:[UIColor clearColor]];
-        [label setFont:[UIFont boldSystemFontOfSize:[[label font] pointSize]]];
-        [self setLabel:label];
-        [[self contentView] addSubview:label];
-        [UIView autoSetPriority:999.0
-                 forConstraints:^{
-                     [label autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 15.0)];
-                 }];
-    }
-    return self;
-}
-
-@end
-
-#pragma mark - VFCTagCell
-
-#pragma mark - Private Interface
-
-@interface VFCTagCell : UITableViewCell
-@property (nonatomic, strong, readwrite) UIView *selectionIndicator;
-@end
-
-#pragma mark - Private Implementation
-
-@implementation VFCTagCell
-
-#pragma mark Initialization
+#pragma mark Lifecycle
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self setSeparatorInset:UIEdgeInsetsZero];
-        [self setLayoutMargins:UIEdgeInsetsZero];
-        [self setPreservesSuperviewLayoutMargins:NO];
+        _state = ResourceCellStateNone;
+        _tracking = NO;
         
-        [[self textLabel] setTextColor:[UIColor blackColor]];
+        self.separatorInset = UIEdgeInsetsZero;
+        self.layoutMargins = UIEdgeInsetsZero;
+        self.preservesSuperviewLayoutMargins = NO;
         
-        UIView *selectionIndicator = [UIView newAutoLayoutView];
-        [[self contentView] addSubview:selectionIndicator];
-        [self setSelectionIndicator:selectionIndicator];
-        [UIView autoSetPriority:999.0
-                 forConstraints:^{
-                     [selectionIndicator autoPinEdgeToSuperviewEdge:ALEdgeTop];
-                     [selectionIndicator autoPinEdgeToSuperviewEdge:ALEdgeBottom];
-                     [selectionIndicator autoPinEdgeToSuperviewEdge:ALEdgeLeft];
-                     [selectionIndicator autoSetDimension:ALDimensionWidth toSize:5.0];
-                 }];
+        UIImageView *imageView = [UIImageView newAutoLayoutView];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        self.resourceImageView = imageView;
+        [self.contentView addSubview:imageView];
+        
+        UILabel *label = [UILabel newAutoLayoutView];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont boldSystemFontOfSize:17.0];
+        self.resourceLabel = label;
+        [self.contentView addSubview:label];
+        
+        [NSLayoutConstraint autoSetPriority:999.0 forConstraints:^{
+            [imageView autoPinEdgeToSuperviewEdge:ALEdgeTop];
+            [imageView autoPinEdgeToSuperviewEdge:ALEdgeRight];
+            [imageView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+            
+            [label autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+            [label autoPinEdgeToSuperviewEdge:ALEdgeRight];
+            [label autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:5.0];
+            [label autoSetDimension:ALDimensionHeight toSize:30.0];
+            
+            [imageView autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:label withOffset:-15.0];
+        }];
+        
+        self.highlightColor = [UIColor venturaFoodsBlueColor];
+        
+        [self addObserver:self forKeyPath:NSStringFromSelector(@selector(frame)) options:NSKeyValueObservingOptionNew context:ResourceCellFrameContext];
     }
     return self;
 }
 
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    UIColor *color = [[self selectionIndicator] backgroundColor];
-    [super setHighlighted:highlighted animated:animated];
-    [[self selectionIndicator] setBackgroundColor:color];
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(frame))];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    UIColor *color = [[self selectionIndicator] backgroundColor];
-    [super setSelected:selected animated:animated];
-    [[self selectionIndicator] setBackgroundColor:color];
-}
-
-@end
-
-#pragma mark - VFCGapAnalysisTagsViewController
-
-#pragma mark - Private Interface
-
-static NSString *const VFCTagCellIdentifier = @"VFCTagCell";
-static NSString *const VFCTagHeaderViewIdentifier = @"VFCTagHeaderView";
-
-@interface VFCGapAnalysisTagsViewController : UITableViewController
-@property (nonatomic, strong, readwrite) NSArray *tagSections;
-@end
-
-#pragma mark - Private Implementation
-
-@implementation VFCGapAnalysisTagsViewController
-
-#pragma mark Initialization
-
-- (instancetype)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-    if (self) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Tags" ofType:@"plist"];
-        NSArray *tagSectionDicts = [NSArray arrayWithContentsOfFile:filePath];
-        NSMutableArray *tagSections = [NSMutableArray array];
-        for (NSDictionary *tagSectionDict in tagSectionDicts) {
-            VFCTagSection *tagSection = [[VFCTagSection alloc] init];
-            [tagSection setTitle:[tagSectionDict objectForKey:@"title"]];
-            [tagSection setTags:[tagSectionDict objectForKey:@"tags"]];
-            [tagSections addObject:tagSection];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (self.isTracking) {
+        if (context == ResourceCellFrameContext) {
+            if ([keyPath isEqualToString:NSStringFromSelector(@selector(frame))]) {
+                CGRect frame = self.frame;
+                CGFloat x = frame.origin.x;
+                if (x == 0) {
+                    if (self.state != ResourceCellStateNone) {
+                        self.state = ResourceCellStateNone;
+                        self.contentView.backgroundColor = [UIColor clearColor];
+                        self.resourceLabel.textColor = [UIColor lightGrayColor];
+                    }
+                } else if (x > -75.0 && x < 75.0) {
+                    if (self.state != ResourceCellStateSelected) {
+                        self.state = ResourceCellStateSelected;
+                        self.contentView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+                        self.resourceLabel.textColor = [UIColor blackColor];
+                    }
+                } else if (x < -150.0) {
+                    if (self.state != ResourceCellStateInclude) {
+                        self.state = ResourceCellStateInclude;
+                        self.contentView.backgroundColor = self.highlightColor;
+                        self.resourceLabel.textColor = [UIColor whiteColor];
+                    }
+                }
+            }
         }
-        [self setTagSections:[NSArray arrayWithArray:tagSections]];
     }
-    return self;
-}
-
-#pragma mark View Lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [[self tableView] setSeparatorInset:UIEdgeInsetsZero];
-    [[self tableView] registerClass:[VFCTagCell class] forCellReuseIdentifier:VFCTagCellIdentifier];
-    [[self tableView] registerClass:[VFCTagHeaderView class] forHeaderFooterViewReuseIdentifier:VFCTagHeaderViewIdentifier];
-}
-
-#pragma mark UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self tagSections] count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    VFCTagSection *tagSection = [[self tagSections] objectAtIndex:section];
-    return [[tagSection tags] count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    VFCTagCell *cell = [tableView dequeueReusableCellWithIdentifier:VFCTagCellIdentifier forIndexPath:indexPath];
-    VFCTagSection *tagSection = [[self tagSections] objectAtIndex:[indexPath section]];
-    NSString *tag = [[tagSection tags] objectAtIndex:[indexPath row]];
-    [[cell textLabel] setText:tag];
-    
-    BOOL selected = (arc4random() % 2 == 0);
-    UIColor *color = selected ? [UIColor venturaBlueColor] : [UIColor clearColor];
-    [[cell selectionIndicator] setBackgroundColor:color];
-    
-    return cell;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    VFCTagHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:VFCTagHeaderViewIdentifier];
-    VFCTagSection *tagSection = [[self tagSections] objectAtIndex:section];
-    [[headerView label] setText:[tagSection title]];
-    [[headerView label] setTextColor:[UIColor whiteColor]];
-    [[headerView contentView] setBackgroundColor:[UIColor venturaBlueColor]];
-    return headerView;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 44.0;
-}
-
-#pragma mark UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
@@ -251,31 +128,191 @@ static NSString *const VFCTagHeaderViewIdentifier = @"VFCTagHeaderView";
 
 #pragma mark - Private Interface
 
-@interface VFCGapAnalysisViewController()
+@interface VFCGapAnalysisViewController() <UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong, readwrite) NSMutableArray *resources;
+@property (nonatomic, strong, readwrite) NSMutableArray *selectedResources;
+@property (nonatomic, strong, readwrite) ResourceCell *selectedCell;
+@property (nonatomic, strong, readwrite) UITableView *tableView;
+@property (nonatomic, strong, readwrite) UITableView *selectedResourcesTableView;
 @end
 
-#pragma mark - Public Implementation
+#pragma mark Public Implementation
 
 @implementation VFCGapAnalysisViewController
 
+#pragma mark Lifecycle
+
 - (instancetype)init {
-    VFCGapAnalysisItemsViewController *itemsVC = [[VFCGapAnalysisItemsViewController alloc] init];
-    self = [super initWithTopViewController:itemsVC];
+    self = [super init];
     if (self) {
-        [[itemsVC view] addGestureRecognizer:[self panGesture]];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Resources" ofType:@"plist"];
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
+        NSArray *filenames = [NSMutableArray arrayWithArray:dict[@"resources"]];
+        self.resources = [NSMutableArray array];
+        for (NSString *filename in filenames) {
+            Resource *resource = [[Resource alloc] init];
+            resource.filename = filename;
+            [self.resources addObject:resource];
+        }
         
-        VFCGapAnalysisTagsViewController *tagsVC = [[VFCGapAnalysisTagsViewController alloc] initWithStyle:UITableViewStylePlain];
-        [tagsVC setEdgesForExtendedLayout:UIRectEdgeTop|UIRectEdgeBottom|UIRectEdgeRight];
-        [self setUnderRightViewController:tagsVC];
-        [self setAnchorLeftRevealAmount:300.0];
-        
-        CALayer *layer = [[[self topViewController] view] layer];
-        [layer setShadowColor:[[UIColor darkGrayColor] CGColor]];
-        [layer setShadowOpacity:1.0];
-        [layer setShadowOffset:CGSizeZero];
-        [layer setShadowRadius:1.0];
+        self.selectedResources = [NSMutableArray array];
     }
     return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    UITableView *tableView = [UITableView newAutoLayoutView];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    tableView.tableFooterView = [UIView new];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    [tableView registerClass:[ResourceCell class] forCellReuseIdentifier:NSStringFromClass([ResourceCell class])];
+    
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    panRecognizer.delegate = self;
+    [tableView addGestureRecognizer:panRecognizer];
+    
+    [tableView.panGestureRecognizer requireGestureRecognizerToFail:panRecognizer];
+    
+    UITableView *selectedResourcesTableView = [UITableView newAutoLayoutView];
+    selectedResourcesTableView.separatorInset = UIEdgeInsetsZero;
+    selectedResourcesTableView.dataSource = self;
+    selectedResourcesTableView.delegate = self;
+    [selectedResourcesTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+    [self.view addSubview:selectedResourcesTableView];
+    self.selectedResourcesTableView = selectedResourcesTableView;
+    
+    [NSLayoutConstraint autoSetPriority:999.0 forConstraints:^{
+        [tableView autoPinEdgeToSuperviewEdge:ALEdgeTop];
+        [tableView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+        [tableView autoPinEdgeToSuperviewEdge:ALEdgeRight];
+        
+        [selectedResourcesTableView autoPinEdgeToSuperviewEdge:ALEdgeTop];
+        [selectedResourcesTableView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+        [selectedResourcesTableView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+        [selectedResourcesTableView autoSetDimension:ALDimensionWidth toSize:320.0];
+        [selectedResourcesTableView autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:tableView];
+    }];
+    
+    [tableView reloadData];
+    [selectedResourcesTableView reloadData];
+}
+
+#pragma mark Private
+
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan: {
+            CGPoint touchLocation = [recognizer locationInView:recognizer.view];
+            NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:touchLocation];
+            ResourceCell *cell = (ResourceCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+            self.selectedCell = cell;
+            self.selectedCell.tracking = YES;
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            CGPoint translation = [recognizer translationInView:recognizer.view];
+            CGRect frame = self.selectedCell.frame;
+            frame.origin.x += translation.x;
+            self.selectedCell.frame = frame;
+            [recognizer setTranslation:CGPointZero inView:recognizer.view];
+            break;
+        }
+        default: {
+            switch (self.selectedCell.state) {
+                case ResourceCellStateInclude: {
+                    NSIndexPath *indexPath = [self.tableView indexPathForCell:self.selectedCell];
+                    Resource *resource = self.resources[indexPath.row];
+                    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:self.selectedResources.count inSection:0];
+                    [self.selectedResources addObject:resource];
+                    [self.selectedResourcesTableView insertRowsAtIndexPaths:@[insertIndexPath] withRowAnimation:UITableViewRowAnimationRight];
+                    [self.resources removeObject:resource];
+                    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                    break;
+                }
+                default:
+                    break;
+            }
+            [UIView animateWithDuration:0.25 animations:^{
+                CGRect frame = self.selectedCell.frame;
+                frame.origin.x = 0.0;
+                self.selectedCell.frame = frame;
+            } completion:^(BOOL finished) {
+                self.selectedCell.tracking = NO;
+                self.selectedCell = nil;
+            }];
+            break;
+        }
+    }
+}
+
+#pragma mark UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    UIPanGestureRecognizer *recognizer = (UIPanGestureRecognizer *)gestureRecognizer;
+    CGPoint velocity = [recognizer velocityInView:recognizer.view];
+    return fabs(velocity.x) > fabs(velocity.y) && velocity.x < 0.0;
+}
+
+#pragma mark UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [tableView isEqual:self.tableView] ? self.resources.count : self.selectedResources.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return ([tableView isEqual:self.tableView]) ? 240.0 : 44.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 30.0;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    // #HACK
+    return [tableView isEqual:self.tableView] ? @"   Available Resources (drag to the left to select)" : @"   Selected Resources (tap to remove)";
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([tableView isEqual:self.tableView]) {
+        ResourceCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ResourceCell class]) forIndexPath:indexPath];
+        Resource *resource = self.resources[indexPath.row];
+        NSString *imageName = nil;
+        NSInteger row = indexPath.row;
+        if (row % 2 == 0) {
+            imageName = @"Dummy1";
+        } else {
+            imageName = @"Dummy2";
+        }
+        cell.resourceImageView.image = [UIImage imageNamed:imageName];
+        cell.resourceLabel.text = [resource.filename stringByDeletingPathExtension];
+        cell.resourceLabel.textColor = [UIColor lightGrayColor];
+        return cell;
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
+    cell.textLabel.numberOfLines = 0;
+    Resource *resource = self.resources[indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:@"Dummy1"];
+    cell.textLabel.text = [resource.filename stringByDeletingPathExtension];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (![tableView isEqual:self.tableView]) {
+        [self.selectedResources removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 @end

@@ -2,11 +2,10 @@
 //  VFCSegmentChoicesViewController.h
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 1/20/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 @import UIKit;
+#import "VFCKit.h"
+
 @class VFCSegmentChoice;
 @class VFCSegmentChoicesViewController;
 
@@ -16,7 +15,6 @@
 
 @protocol VFCSegmentChoicesViewControllerDelegate <NSObject>
 - (void)segmentChoicesViewController:(VFCSegmentChoicesViewController *)segmentChoicesViewController didSelectSegmentChoice:(VFCSegmentChoice *)segmentChoice;
-- (void)segmentChoicesViewControllerDidSelectInfoButton:(VFCSegmentChoicesViewController *)segmentChoicesViewController;
 @end
 
 #pragma mark - VFCSegmentChoicesViewController
@@ -26,4 +24,5 @@
 @interface VFCSegmentChoicesViewController : UICollectionViewController
 @property (nonatomic, weak, readwrite) id<VFCSegmentChoicesViewControllerDelegate> segmentChoicesViewControllerDelegate;
 - (instancetype)initWithSegmentChoices:(NSArray *)segmentChoices;
+- (void)hideHeader;
 @end

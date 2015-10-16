@@ -1,4 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
+source 'git@bitbucket.org:xceleratemedia/xmrepo.git'
 platform :ios, '8.0'
 
 pod 'PureLayout'
@@ -8,3 +9,5 @@ pod 'SSZipArchive'
 pod 'vfrReader'
 pod 'ECSlidingViewController'
 pod 'CSStickyHeaderFlowLayout'
+
+pod 'VFCKit', :head

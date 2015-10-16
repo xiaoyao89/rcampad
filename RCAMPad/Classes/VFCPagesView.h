@@ -2,16 +2,23 @@
 //  VFCPagesView.h
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 2/2/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 @import UIKit;
+
+@class VFCPagesView;
+
+#pragma mark - VFCPagesViewDelegate
+
+@protocol VFCPagesViewDelegate <NSObject>
+- (void)pagesView:(VFCPagesView *)pagesView didUpdatePage:(NSInteger)page;
+@end
 
 #pragma mark - VFCPagesView
 
 #pragma mark - Public Interface
 
 @interface VFCPagesView : UIView
+@property (nonatomic, weak, readwrite) id<VFCPagesViewDelegate> delegate;
+@property (nonatomic, strong, readonly) UIPageControl *pageControl;
 @property (nonatomic, strong, readwrite) NSArray *pageViews;
 @end

@@ -2,12 +2,8 @@
 //  VFCCarat.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 12/22/14.
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCCarat.h"
-#import "UIColor+VFCAdditions.h"
 
 #pragma mark - VFCCarat
 
@@ -27,7 +23,7 @@
     point = CGPointMake(0.5*rect.size.width, 0.0);
     CGContextAddLineToPoint(context, point.x, point.y);
     
-    [[UIColor venturaBlueColor] setFill];
+    [[UIColor venturaFoodsBlueColor] setFill];
     CGContextFillPath(context);
 }
 

@@ -2,18 +2,26 @@
 //  VFCMacroTrend.h
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 1/20/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 @import Foundation;
+
+#pragma mark - VFCMacroTrendPage
+
+#pragma mark - Public Interface
+
+@interface VFCMacroTrendPage : NSObject
+@property (nonatomic, copy, readwrite) NSString *imageName;
+@property (nonatomic, strong, readwrite) NSArray *deepDiveImageNames;
+@end
 
 #pragma mark - VFCMacroTrend
 
 #pragma mark - Public Interface
 
 @interface VFCMacroTrend : NSObject <NSCopying>
+@property (nonatomic, copy, readwrite) NSString *identifier;
 @property (nonatomic, copy, readwrite) NSString *title;
 @property (nonatomic, copy, readwrite) NSString *imageName;
+@property (nonatomic, strong, readwrite) NSArray *pages;
 + (NSArray *)macroTrends;
 @end

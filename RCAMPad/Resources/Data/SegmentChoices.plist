@@ -6,18 +6,6 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>Fine Dining</string>
-			<key>imageName</key>
-			<string>FineDining.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Mid-Scale Dining</string>
-			<key>imageName</key>
-			<string>MidScaleDining.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
 			<string>Casual Dining</string>
 			<key>imageName</key>
 			<string>CasualDining.png</string>
@@ -30,15 +18,27 @@
 		</dict>
 		<dict>
 			<key>title</key>
+			<string>Mid-Scale Dining</string>
+			<key>imageName</key>
+			<string>MidScaleDining.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
 			<string>Quick Service</string>
 			<key>imageName</key>
 			<string>QuickService.png</string>
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Emerging Chains</string>
+			<string>Colleges and Universities</string>
 			<key>imageName</key>
 			<string>EmergingChains.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Fine Dining</string>
+			<key>imageName</key>
+			<string>FineDining.png</string>
 		</dict>
 	</array>
 </dict>

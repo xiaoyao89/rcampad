@@ -2,11 +2,9 @@
 //  VFCPagesView.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 2/2/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCPagesView.h"
+#import "VFCDocumentHeaderView.h"
 #import "VFCPageView.h"
 #import "PureLayout.h"
 
@@ -41,7 +39,7 @@
         [self setPageControl:pageControl];
         [self addSubview:pageControl];
         
-        [UIView autoSetPriority:999.0
+        [NSLayoutConstraint autoSetPriority:999.0
                  forConstraints:^{
                      [scrollView autoPinEdgeToSuperviewEdge:ALEdgeTop];
                      [scrollView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
@@ -63,6 +61,12 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSInteger page = [scrollView contentOffset].x / [scrollView frame].size.width;
     [[self pageControl] setCurrentPage:page];
+    if ([self.delegate respondsToSelector:@selector(pagesView:didUpdatePage:)]) {
+        [self.delegate pagesView:self didUpdatePage:page];
+    }
+    if (self.pageControl.currentPage == self.pageControl.numberOfPages - 1) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:VFCDocumentHeaderViewShowNextButton object:nil];
+    }
 }
 
 #pragma mark Property Overrides
@@ -74,7 +78,6 @@
         }
         
         _pageViews = pageViews;
-        
         
         for (VFCPageView *pageView in _pageViews) {
             [[self scrollView] addSubview:pageView];

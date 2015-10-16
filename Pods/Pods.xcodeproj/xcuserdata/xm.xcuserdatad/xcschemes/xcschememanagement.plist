@@ -4,42 +4,27 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-AFNetworking.xcscheme</key>
+		<key>AFNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CSStickyHeaderFlowLayout.xcscheme</key>
+		<key>CSStickyHeaderFlowLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CargoBay.xcscheme</key>
+		<key>CargoBay.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ECSlidingViewController.xcscheme</key>
+		<key>ECSlidingViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-GBVersionTracking.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-PureLayout.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SSZipArchive.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-vfrReader.xcscheme</key>
+		<key>GBVersionTracking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -49,50 +34,75 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PureLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SSZipArchive.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>VFCKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>vfrReader.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1A33B50CE09AEE35E6237A1F</key>
+		<key>00E2D985DFCDB4227053ACF7A15062B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1AA953FD4C9B3870CEF7AB45</key>
+		<key>26CE9F127B86091FCFF836AD6594EDA4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>38C1ACF6A547A2DE6C5B1716</key>
+		<key>405C182329502E18125D4F94782F23BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6978AEDD4B69A1AEB1267D84</key>
+		<key>657E90EE977E4E25C62D3C1B5F26E886</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7203E19464E80F72D9C1F61E</key>
+		<key>7D87B375CC3EA4C732059651B0EB37BB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9CA8B8FF899363208D36FBD5</key>
+		<key>7F8668A8CF780B1B8013BFEE88E18FB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C5F6A7DB2ED843589EB50CE9</key>
+		<key>822247BF1172CDD386827EA2AA235C10</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C82E84E48B8CF96E1DDF0B41</key>
+		<key>8B2286559806B2B476046F6B37DADCFC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F3BB0D8B4BF6366FC2CAB0C8</key>
+		<key>90FF1E66ECADE8D0D990AA1B6376F428</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AE77BB8FC859D80A57C1F8DB27DFE6E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

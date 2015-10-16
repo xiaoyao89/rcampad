@@ -2,14 +2,12 @@
 //  AppDelegate.m
 //  RCAMPad
 //
-//  Created by Xiao Yao
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "AppDelegate.h"
 #import "VFCDocument.h"
 #import "VFCDocumentViewController.h"
-#import "UIColor+VFCAdditions.h"
+#import "ViewController.h"
+#import "VFCTutorialViewController.h"
 
 #pragma mark - AppDelegate
 
@@ -26,25 +24,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Appearance
-    [[UINavigationBar appearance] setBarTintColor:[UIColor venturaBlueColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor venturaFoodsBlueColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
-    [[UIToolbar appearance] setBarTintColor:[UIColor venturaBlueColor]];
+    [[UIToolbar appearance] setBarTintColor:[UIColor venturaFoodsBlueColor]];
     [[UIToolbar appearance] setTintColor:[UIColor whiteColor]];
     [[UIToolbar appearance] setTranslucent:NO];
     NSDictionary *titleDict = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [[UINavigationBar appearance] setTitleTextAttributes:titleDict];
     
-    [[UISearchBar appearance] setTintColor:[UIColor venturaBlueColor]];
+    [[UISearchBar appearance] setTintColor:[UIColor venturaFoodsBlueColor]];
     
-    [[UITableViewCell appearance] setLayoutMargins:UIEdgeInsetsZero];
-    [[UITableViewCell appearance] setSeparatorInset:UIEdgeInsetsZero];
-    [[UITableViewCell appearance] setPreservesSuperviewLayoutMargins:NO];
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window = window;
     
-    [[UITableView appearance] setLayoutMargins:UIEdgeInsetsZero];
-    [[UITableView appearance] setSeparatorInset:UIEdgeInsetsZero];
-    [[UITableView appearance] setContentInset:UIEdgeInsetsZero];
-        
+    ViewController *viewController = [[ViewController alloc] init];
+    self.window.rootViewController = viewController;
+    
+    [self.window makeKeyAndVisible];
+    
+    //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Tutorial" ofType:@"plist"];
+    //NSArray *pageDicts = [NSArray arrayWithContentsOfFile:filePath];
+    //VFCTutorialViewController *tutorialVC = [[VFCTutorialViewController alloc] initWithArray:pageDicts];
+    //[viewController presentViewController:tutorialVC animated:YES completion:nil];
+    
     return YES;
 }
 

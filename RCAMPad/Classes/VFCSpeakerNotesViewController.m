@@ -2,9 +2,6 @@
 //  VFCSpeakerNotesViewController.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 1/29/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCSpeakerNotesViewController.h"
 #import "VFCSpeakerNotesManager.h"
@@ -34,10 +31,10 @@
     [textView setFont:[UIFont systemFontOfSize:17.0]];
     [textView setEditable:NO];
     [[self view] addSubview:textView];
-    [UIView autoSetPriority:999.0
-             forConstraints:^{
-                 [textView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
-             }];
+    [NSLayoutConstraint autoSetPriority:999.0
+                         forConstraints:^{
+                             [textView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+                         }];
     [self setTextView:textView];
     
     [self setTitle:@"Speaker Notes"];

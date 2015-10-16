@@ -2,15 +2,21 @@
 //  VFCDeepDiveViewController.h
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 2/4/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 @import UIKit;
+
+#import "ECSlidingViewController.h"
 
 #pragma mark - VFCDeepDiveViewController
 
 #pragma mark - Public Interface
 
 @interface VFCDeepDiveViewController : UIViewController
+- (instancetype)initWithImageNames:(NSArray *)imageNames speakerNotesIdentifier:(NSString *)speakerNotesIdentifier NS_DESIGNATED_INITIALIZER;
+@end
+
+#pragma mark - VFCDeepDiveSlidingViewController
+
+@interface VFCDeepDiveSlidingViewController : ECSlidingViewController
+- (instancetype)initWithImageNames:(NSArray *)imageNames speakerNotesIdentifier:(NSString *)speakerNotesIdentifier NS_DESIGNATED_INITIALIZER;
 @end

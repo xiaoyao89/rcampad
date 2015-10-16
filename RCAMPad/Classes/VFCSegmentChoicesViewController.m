@@ -2,18 +2,17 @@
 //  VFCSegmentChoicesViewController.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 1/20/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCSegmentChoicesViewController.h"
 #import "CSStickyHeaderFlowLayout.h"
+#import "VFCDeepDiveViewController.h"
 #import "VFCPagesView.h"
 #import "VFCPageView.h"
 #import "VFCSegmentChoice.h"
 #import "VFCSpeakerNotesManager.h"
 #import "PureLayout.h"
 #import "UIColor+VFCAdditions.h"
+#import "UIImage+VFCAdditions.h"
 
 #pragma mark - VFCSegmentChoiceHeaderView
 
@@ -22,6 +21,7 @@
 @interface VFCSegmentChoiceHeaderView : UICollectionReusableView
 @property (nonatomic, strong, readwrite) VFCPagesView *pagesView;
 @property (nonatomic, strong, readwrite) UIButton *infoButton;
+@property (nonatomic, strong, readwrite) UIButton *closeButton;
 @end
 
 #pragma mark - Private Implementation
@@ -34,18 +34,28 @@
     self = [super initWithFrame:frame];
     if (self) {
         VFCPagesView *pagesView = [VFCPagesView newAutoLayoutView];
-        [self setPagesView:pagesView];
+        self.pagesView = pagesView;
         [self addSubview:pagesView];
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];
         [self addSubview:button];
-        [self setInfoButton:button];
+        self.infoButton = button;
         
-        [UIView autoSetPriority:999.0
+        UIButton *closeButton = [UIButton newAutoLayoutView];
+        UIImage *image = [UIImage imageNamed:@"Close"];
+        image = [image tintedImageWithColor:[UIColor blueColor]];
+        [closeButton setImage:image forState:UIControlStateNormal];
+        [self addSubview:closeButton];
+        self.closeButton = closeButton;
+        
+        [NSLayoutConstraint autoSetPriority:999.0
                  forConstraints:^{
                      [pagesView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
                      [button autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:10.0];
                      [button autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:10.0];
+                     
+                     [closeButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:10.0];
+                     [closeButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:10.0];
                  }];
 
     }
@@ -61,7 +71,6 @@
 @interface VFCSegmentChoiceCell : UICollectionViewCell
 @property (nonatomic, strong, readwrite) UIImageView *imageView;
 @property (nonatomic, strong, readwrite) UILabel *label;
-@property (nonatomic, strong, readwrite) UIView *overlayView;
 @end
 
 #pragma mark - Private Implementation
@@ -73,37 +82,37 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        UIImageView *imageView = [UIImageView newAutoLayoutView];
-        [imageView setContentMode:UIViewContentModeCenter];
-        [[self contentView] addSubview:imageView];
-        [self setImageView:imageView];
+        CALayer *layer = self.contentView.layer;
+        layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1.0].CGColor;
+        layer.borderWidth = 0.5;
         
-        UIView *overlayView = [UIView newAutoLayoutView];
-        [overlayView setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.5]];
-        [[self contentView] addSubview:overlayView];
-        [self setOverlayView:overlayView];
+        UIImageView *imageView = [UIImageView newAutoLayoutView];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:imageView];
+        self.imageView = imageView;
         
         UILabel *label = [UILabel newAutoLayoutView];
-        [label setTextAlignment:NSTextAlignmentCenter];
-        [label setFont:[UIFont boldSystemFontOfSize:30.0]];
-        [label setTextColor:[UIColor venturaBlueColor]];
-        [label setNumberOfLines:0];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont boldSystemFontOfSize:30.0];
+        label.textColor = [UIColor venturaFoodsBlueColor];
+        label.numberOfLines = 0;
         [[self contentView] addSubview:label];
-        [self setLabel:label];
+        self.label = label;
         
-        [UIView autoSetPriority:999.0
+        [NSLayoutConstraint autoSetPriority:999.0
                  forConstraints:^{
-                     [imageView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
-                     [overlayView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
-                     [label autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(20.0, 20.0, 20.0, 20.0)];
+                     [imageView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:10.0];
+                     [imageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:40.0];
+                     [imageView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:40.0];
+                     [imageView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionHeight ofView:imageView];
+                     
+                     [label autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:10.0];
+                     [label autoPinEdgeToSuperviewEdge:ALEdgeTop];
+                     [label autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+                     [label autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:imageView withOffset:10.0];
                  }];
     }
     return self;
-}
-
-- (void)setHighlighted:(BOOL)highlighted {
-    [super setHighlighted:highlighted];
-    [[self overlayView] setBackgroundColor:highlighted ? [UIColor clearColor] : [[UIColor whiteColor] colorWithAlphaComponent:0.5]];
 }
 
 @end
@@ -126,15 +135,15 @@ static NSString *const VFCSegmentChoiceHeaderViewIdentifier = @"VFCSegmentChoice
 
 - (instancetype)initWithSegmentChoices:(NSArray *)segmentChoices {
     CSStickyHeaderFlowLayout *layout = [[CSStickyHeaderFlowLayout alloc] init];
-    [layout setSectionInset:UIEdgeInsetsZero];
-    [layout setMinimumInteritemSpacing:0.0];
-    [layout setMinimumLineSpacing:0.0];
-    [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    [layout setItemSize:CGSizeMake(1024.0/2.0, 309.0)];
+    layout.sectionInset = UIEdgeInsetsZero;
+    layout.minimumInteritemSpacing = 0.0;
+    layout.minimumLineSpacing = 0.0;
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.itemSize = CGSizeMake(1024.0/2.0, 206.0);
     self = [super initWithCollectionViewLayout:layout];
     if (self) {
-        [self setSegmentChoices:segmentChoices];
-        [self setShowHeaderView:NO];
+        self.segmentChoices = segmentChoices;
+        self.showHeaderView = NO;
     }
     return self;
 }
@@ -143,9 +152,9 @@ static NSString *const VFCSegmentChoiceHeaderViewIdentifier = @"VFCSegmentChoice
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[self collectionView] setBackgroundColor:[UIColor whiteColor]];
-    [[self collectionView] registerClass:[VFCSegmentChoiceCell class] forCellWithReuseIdentifier:VFCSegmentChoiceCellIdentifier];
-    [[self collectionView] registerClass:[VFCSegmentChoiceHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:VFCSegmentChoiceHeaderViewIdentifier];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    [self.collectionView registerClass:[VFCSegmentChoiceCell class] forCellWithReuseIdentifier:VFCSegmentChoiceCellIdentifier];
+    [self.collectionView registerClass:[VFCSegmentChoiceHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:VFCSegmentChoiceHeaderViewIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -160,23 +169,21 @@ static NSString *const VFCSegmentChoiceHeaderViewIdentifier = @"VFCSegmentChoice
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSInteger count = [[self segmentChoices] count];
-    NSInteger rem = count % 3;
+    NSInteger count = self.segmentChoices.count;
+    NSInteger rem = count % 1;
     return count + rem;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     VFCSegmentChoiceCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:VFCSegmentChoiceCellIdentifier forIndexPath:indexPath];
-    if ([indexPath row] < [[self segmentChoices] count]) {
-        VFCSegmentChoice *choice = [[self segmentChoices] objectAtIndex:[indexPath row]];
-        [[cell label] setText:[[choice title] uppercaseString]];
-        [[cell overlayView] setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.5]];
-        UIImage *image = [UIImage imageNamed:[choice imageName]];
-        [[cell imageView] setImage:image];
+    if (indexPath.row < self.segmentChoices.count) {
+        VFCSegmentChoice *choice = [self.segmentChoices objectAtIndex:indexPath.row];
+        [cell.label setText:choice.title.uppercaseString];
+        UIImage *image = [UIImage imageNamed:choice.imageName];
+        cell.imageView.image = image;
     } else {
-        [[cell label] setText:nil];
-        [[cell imageView] setImage:nil];
-        [[cell overlayView] setBackgroundColor:[UIColor clearColor]];
+        cell.label.text = nil;
+        cell.imageView.image = nil;
     }
     return cell;
 }
@@ -184,13 +191,13 @@ static NSString *const VFCSegmentChoiceHeaderViewIdentifier = @"VFCSegmentChoice
 #pragma mark UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self setShowHeaderView:YES];
-    [[self collectionView] reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    self.showHeaderView = YES;
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
     
-    if ([indexPath row] < [[self segmentChoices] count]) {
-        VFCSegmentChoice *choice = [[self segmentChoices] objectAtIndex:[indexPath row]];
-        if ([[self segmentChoicesViewControllerDelegate] respondsToSelector:@selector(segmentChoicesViewController:didSelectSegmentChoice:)]) {
-            [[self segmentChoicesViewControllerDelegate] segmentChoicesViewController:self didSelectSegmentChoice:choice];
+    if (indexPath.row < self.segmentChoices.count) {
+        VFCSegmentChoice *choice = [self.segmentChoices objectAtIndex:indexPath.row];
+        if ([self.segmentChoicesViewControllerDelegate respondsToSelector:@selector(segmentChoicesViewController:didSelectSegmentChoice:)]) {
+            [self.segmentChoicesViewControllerDelegate segmentChoicesViewController:self didSelectSegmentChoice:choice];
         }
     }
 }
@@ -202,26 +209,28 @@ static NSString *const VFCSegmentChoiceHeaderViewIdentifier = @"VFCSegmentChoice
                                                                                            forIndexPath:indexPath];
         NSMutableArray *pageViews = [NSMutableArray array];
         NSArray *imageNames = @[@"DummyLayout", @"DummyLayout", @"DummyLayout", @"DummyLayout", @"DummyLayout"];
-        for (NSInteger i=0; i<[imageNames count]; i++) {
+        for (NSInteger i=0; i<imageNames.count; i++) {
             VFCPageView *pageView = [VFCPageView newAutoLayoutView];
-            [[pageView imageView] setImage:[UIImage imageNamed:imageNames[i]]];
+            pageView.imageView.image = [UIImage imageNamed:imageNames[i]];
             [pageViews addObject:pageView];
         }
-        [[headerView pagesView] setPageViews:pageViews];
+        headerView.pagesView.pageViews = pageViews;
         
-        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                     action:@selector(hideHeader:)];
-        [headerView addGestureRecognizer:recognizer];
+        [headerView.infoButton addTarget:self action:@selector(didSelectInfoButton:) forControlEvents:UIControlEventTouchUpInside];
+        [headerView.closeButton addTarget:self action:@selector(hideHeader) forControlEvents:UIControlEventTouchUpInside];
         
-        [[headerView infoButton] addTarget:self action:@selector(didSelectInfoButton:) forControlEvents:UIControlEventTouchUpInside];
-        [headerView setBackgroundColor:[UIColor whiteColor]];
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                        action:@selector(hideHeader)];
+        [headerView addGestureRecognizer:tapRecognizer];
+        
+        headerView.backgroundColor = [UIColor whiteColor];
         return headerView;
     }
     return nil;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return [self showHeaderView] ? [collectionView frame].size : CGSizeZero;
+    return self.showHeaderView ? collectionView.frame.size : CGSizeZero;
 }
 
 #pragma mark Private
@@ -229,22 +238,25 @@ static NSString *const VFCSegmentChoiceHeaderViewIdentifier = @"VFCSegmentChoice
 - (void)setShowHeaderView:(BOOL)showHeaderView {
     if (_showHeaderView != showHeaderView) {
         _showHeaderView = showHeaderView;
-        [[self collectionView] setScrollEnabled:!_showHeaderView];
+        [self.collectionView setScrollEnabled:!_showHeaderView];
     }
 }
 
-- (void)hideHeader:(UITapGestureRecognizer *)recognizer {
-    [self setShowHeaderView:NO];
-    [[self collectionView] reloadSections:[NSIndexSet indexSetWithIndex:0]];
-    if ([[self segmentChoicesViewControllerDelegate] respondsToSelector:@selector(segmentChoicesViewController:didSelectSegmentChoice:)]) {
-        [[self segmentChoicesViewControllerDelegate] segmentChoicesViewController:self didSelectSegmentChoice:nil];
+- (void)hideHeader {
+    if (self.showHeaderView) {
+        self.showHeaderView = NO;
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+        if ([self.segmentChoicesViewControllerDelegate respondsToSelector:@selector(segmentChoicesViewController:didSelectSegmentChoice:)]) {
+            [self.segmentChoicesViewControllerDelegate segmentChoicesViewController:self didSelectSegmentChoice:nil];
+        }
     }
 }
 
 - (void)didSelectInfoButton:(UIButton *)button {
-    if ([[self segmentChoicesViewControllerDelegate] respondsToSelector:@selector(segmentChoicesViewControllerDidSelectInfoButton:)]) {
-        [[self segmentChoicesViewControllerDelegate] segmentChoicesViewControllerDidSelectInfoButton:self];
-    }
+    NSArray *imageNames = nil;
+    NSString *speakerNotesID = [NSString stringWithFormat:@"Millenials"];
+    VFCDeepDiveSlidingViewController *slidingVC = [[VFCDeepDiveSlidingViewController alloc] initWithImageNames:imageNames speakerNotesIdentifier:speakerNotesID];
+    [self presentViewController:slidingVC animated:YES completion:nil];
 }
 
 @end

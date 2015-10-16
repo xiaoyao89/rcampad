@@ -2,15 +2,11 @@
 //  VFCResourcesViewController.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 12/22/14.
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
 @import MessageUI;
 #import "ReaderViewController.h"
 #import "ReaderDocument.h"
 #import "VFCResourcesViewController.h"
-#import "UIColor+VFCAdditions.h"
 
 #pragma mark - VFCResourceCell
 
@@ -146,7 +142,7 @@ static NSString *VFCResourceCellIdentifier = @"VFCResourceCell";
                                                                         [[mailVC navigationBar] setTintColor:[UIColor whiteColor]];
                                                                         [self presentViewController:mailVC animated:YES completion:nil];
                                                                     }];
-    [action setBackgroundColor:[UIColor venturaBlueColor]];
+    [action setBackgroundColor:[UIColor venturaFoodsBlueColor]];
     return @[action];
 }
 

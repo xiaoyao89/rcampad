@@ -2,11 +2,9 @@
 //  VFCSpeakerNotesManager.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 2/2/15.
-//  Copyright (c) 2015 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCSpeakerNotesManager.h"
+#import "VFCUtilities.h"
 
 #pragma mark - VFCSpeakerNotesManager
 
@@ -43,6 +41,13 @@
 }
 
 #pragma mark Public
+
+- (void)setSpeakerNotesKey:(NSString *)speakerNotesKey {
+    if (_speakerNotesKey != speakerNotesKey) {
+        _speakerNotesKey = speakerNotesKey;
+        VFCLog(@"Updating speaker notes key to <%@>", _speakerNotesKey);
+    }
+}
 
 - (NSString *)speakerNotes {
     return [[self speakerNotesDictionary] objectForKey:[self speakerNotesKey]];

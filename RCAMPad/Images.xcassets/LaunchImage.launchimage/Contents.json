@@ -15,6 +15,12 @@
       "minimum-system-version" : "7.0",
       "filename" : "Default@2x.png",
       "scale" : "2x"
+    },
+    {
+      "orientation" : "landscape",
+      "idiom" : "ipad",
+      "extent" : "full-screen",
+      "scale" : "2x"
     }
   ],
   "info" : {

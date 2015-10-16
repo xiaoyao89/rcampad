@@ -175,6 +175,8 @@ BOOL CBValidateTrust(SecTrustRef trust, NSError * __autoreleasing *error) {
         
         return NO;
     }
+#else
+#pragma unused (trust, error)
 #endif
     
     return YES;
@@ -246,6 +248,8 @@ BOOL CBValidatePurchaseInfoMatchesReceiptForDevice(NSDictionary *purchaseInfo, N
         }
 #endif
     }
+#else
+#pragma unused (purchaseInfo, receipt)
 #endif
 
     return YES;
@@ -757,6 +761,8 @@ NSDictionary * CBPurchaseInfoFromTransactionReceipt(NSData *transactionReceiptDa
 
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
     [self verifyTransactionReceipt:CBTransactionReceiptFromPaymentTransaction(transaction) password:passwordOrNil success:success failure:failure];
+#else
+#pragma unused (passwordOrNil, success)
 #endif
 }
 
@@ -828,7 +834,7 @@ NSDictionary * CBPurchaseInfoFromTransactionReceipt(NSData *transactionReceiptDa
                 }
                 
                 // Every (re-)installation generates a new unique identifier for vendor.
-                // Every purchase and restoration receipt will be tag with this new unique identifier.
+                // Every purchase and restoration receipt will be tagged with this new unique identifier.
                 // However, the latest receipt info might have a unique identifier for vendor from another device, from a previous installation, etc.
                 // Therefore, we should only check if the purchase info matches receipt for device for receipt we restored with this device.
                 isValid = CBValidatePurchaseInfoMatchesReceiptForDevice(purchaseInfo, receipt, &error);
@@ -1003,6 +1009,8 @@ NSDictionary * CBPurchaseInfoFromTransactionReceipt(NSData *transactionReceiptDa
             return NO;
         }        
     }
+#else
+#pragma unused (transaction, error)
 #endif
 
     return YES;

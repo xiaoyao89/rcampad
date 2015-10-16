@@ -2,16 +2,13 @@
 //  VFCDocumentHeaderView.m
 //  RCAMPad
 //
-//  Created by Xcelerate Media iMac on 12/18/14.
-//  Copyright (c) 2014 Xcelerate Media Inc. All rights reserved.
-//
 
 #import "VFCDocumentHeaderView.h"
 #import "VFCCarat.h"
 #import "VFCCrumbTrailView.h"
 #import "VFCSegmentButton.h"
 #import "PureLayout.h"
-#import "UIColor+VFCAdditions.h"
+#import "ECSlidingViewController.h"
 #import "UIImage+VFCAdditions.h"
 
 #pragma mark - VFCDocumentHeaderView
@@ -30,16 +27,23 @@
 
 @property (nonatomic, strong, readwrite) UIColor *selectedColor;
 
+@property (nonatomic, strong, readwrite) UIButton *speakerNotesButton;
+@property (nonatomic, strong, readwrite) UIButton *nextButton;
+@property (nonatomic, strong, readwrite) UIButton *continueButton;
+
 @end
 
 #pragma mark - Public Implementation
+
+NSString *const VFCDocumentHeaderViewShowNextButton = @"VFCDocumentHeaderViewShowNextButton";
+NSString *const VFCDocumentheaderViewHideNextButton = @"VFCDocumentheaderViewHideNextButton";
 
 @implementation VFCDocumentHeaderView
 
 #pragma mark Initialization
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)init {
+    self = [super init];
     if (self) {
         [self setSelectedColor:[UIColor colorWithWhite:0.8 alpha:1.0]];
         
@@ -48,7 +52,7 @@
         [self addSubview:topView];
         
         UIView *bottomView = [UIView newAutoLayoutView];
-        [bottomView setBackgroundColor:[UIColor venturaBlueColor]];
+        [bottomView setBackgroundColor:[UIColor venturaFoodsBlueColor]];
         [self addSubview:bottomView];
         
         [topView autoPinEdgeToSuperviewEdge:ALEdgeTop];
@@ -78,14 +82,28 @@
         [topView addSubview:buttonsContainer];
         
         [buttonsContainer autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:[self informationButton]];
-        [buttonsContainer autoPinEdgeToSuperviewEdge:ALEdgeRight];
         [buttonsContainer autoPinEdgeToSuperviewEdge:ALEdgeTop];
         [buttonsContainer autoPinEdgeToSuperviewEdge:ALEdgeBottom];
         
+        UIButton *speakerNotesButton = [UIButton newAutoLayoutView];
+        [speakerNotesButton setBackgroundColor:[UIColor clearColor]];
+        UIImage *image = [UIImage imageNamed:@"Menu"];
+        image = [image tintedImageWithColor:[UIColor colorWithWhite:0.8 alpha:1.0]];
+        [speakerNotesButton setImage:image forState:UIControlStateNormal];
+        [[speakerNotesButton imageView] setContentMode:UIViewContentModeCenter];
+        [speakerNotesButton addTarget:self action:@selector(toggleSpeakerNotes:) forControlEvents:UIControlEventTouchUpInside];
+        [topView addSubview:speakerNotesButton];
+        
+        [speakerNotesButton autoPinEdgeToSuperviewEdge:ALEdgeTop];
+        [speakerNotesButton autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+        [speakerNotesButton autoPinEdgeToSuperviewEdge:ALEdgeRight];
+        [speakerNotesButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:buttonsContainer];
+        [speakerNotesButton autoSetDimension:ALDimensionWidth toSize:44.0];
+        
         NSMutableArray *buttons = [NSMutableArray array];
         
-        NSArray *imageIDs = @[@"MacroTrend", @"SegmentChoice", @"SuggestedSolution", @"SuggestedSolution"];
-        NSArray *imageNames = @[@"MacroTrend", @"SegmentChoice", @"SuggestedSolution", @"SuggestedSolution"];
+        NSArray *imageIDs = @[@"MacroTrend", @"SegmentChoice", @"GapAnalysis", @"SuggestedSolution"];
+        NSArray *imageNames = @[@"MacroTrend", @"SegmentChoice", @"GapAnalysis", @"SuggestedSolution"];
         NSArray *textStrings = @[@"MACRO TREND", @"SEGMENT CHOICE", @"GAP ANALYSIS", @"SOLUTION"];
         NSInteger count = [imageIDs count];
         for (NSInteger i=0; i<count; i++) {
@@ -119,10 +137,18 @@
         }
         [buttons autoDistributeViewsAlongAxis:ALAxisHorizontal alignedTo:ALAttributeHorizontal withFixedSpacing:0.0];
         
+        VFCSegmentButton *segButton = [buttons firstObject];
+        [segButton setBackgroundColor:[self selectedColor]];
+        [[segButton label] setTextColor:[UIColor whiteColor]];
+        image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Filled", [segButton imageIdentifier]]];
+        image = [image tintedImageWithColor:[UIColor whiteColor]];
+        [[segButton iconImageView] setImage:image];
+        self.selectedSegmentButton = segButton;
+        
         // Carat
         VFCCarat *carat = [VFCCarat newAutoLayoutView];
         button = [buttons firstObject];
-        [carat setFrame:CGRectMake([button frame].origin.x-0.5*[button frame].size.width, [topView frame].size.height-15.0, 30.0, 15.0)];
+        [carat setFrame:CGRectMake(83.0, [topView frame].size.height-15.0, 30.0, 15.0)];
         [carat setBackgroundColor:[UIColor clearColor]];
         [self setCarat:carat];
         [topView addSubview:carat];
@@ -131,17 +157,72 @@
         
         // Crumbtrail view
         VFCCrumbTrailView *ctView = [VFCCrumbTrailView newAutoLayoutView];
-        [ctView setBackgroundColor:[UIColor clearColor]];
+        ctView.backgroundColor = [UIColor clearColor];
         [bottomView addSubview:ctView];
-        [self setCrumbTrailView:ctView];
-        [ctView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 15.0)];
+        self.crumbTrailView = ctView;
+        [ctView autoPinEdgeToSuperviewEdge:ALEdgeTop];
+        [ctView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+        [ctView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:15.0];
         
-        [self setSegmentButtons:[NSArray arrayWithArray:buttons]];
+        UIButton *nextButton = [UIButton newAutoLayoutView];
+        nextButton.backgroundColor = [UIColor clearColor];
+        image = [UIImage imageNamed:@"Next"];
+        image = [image tintedImageWithColor:[UIColor whiteColor]];
+        [nextButton setImage:image forState:UIControlStateNormal];
+        [bottomView addSubview:nextButton];
+        [nextButton autoPinEdgeToSuperviewEdge:ALEdgeTop];
+        [nextButton autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+        [nextButton autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:15.0];
+        self.nextButton = nextButton;
+        self.nextButton.alpha = 0.0;
+        
+        UIButton *continueButton = [UIButton newAutoLayoutView];
+        continueButton.backgroundColor = [UIColor clearColor];
+        [continueButton setTitle:@"Continue" forState:UIControlStateNormal];
+        continueButton.alpha = 0.0;
+        [bottomView addSubview:continueButton];
+        self.continueButton = continueButton;
+        
+        [continueButton autoPinEdgeToSuperviewEdge:ALEdgeTop];
+        [continueButton autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+        [continueButton autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:nextButton withOffset:-5.0];
+        [ctView autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:continueButton];
+
+        self.segmentButtons = [NSArray arrayWithArray:buttons];
+        
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        
+        [center addObserverForName:VFCDocumentHeaderViewShowNextButton
+                            object:nil
+                             queue:[NSOperationQueue mainQueue]
+                        usingBlock:^(NSNotification *note) {
+                            [self flashNextButton:3];
+                        }];
+        
+        [center addObserverForName:VFCDocumentheaderViewHideNextButton
+                            object:nil
+                             queue:[NSOperationQueue mainQueue]
+                        usingBlock:^(NSNotification *note) {
+                            self.nextButton.alpha = 0.0;
+                            self.continueButton.alpha = 0.0;
+                        }];
     }
     return self;
 }
 
+#pragma mark Memory Management
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark Public
+
+- (void)moveCaratToPoint:(CGPoint)point {
+    CGPoint center = self.carat.center;
+    center.x = point.x;
+    self.carat.center = center;
+}
 
 - (void)moveCaratToIndex:(NSInteger)index {
     [self moveCarat:[[self segmentButtons] objectAtIndex:index]];
@@ -171,9 +252,40 @@
         image = [image tintedImageWithColor:[UIColor whiteColor]];
         [[button iconImageView] setImage:image];
         [self setSelectedSegmentButton:button];
-        if ([[self delegate] respondsToSelector:@selector(documentHeaderView:didSelectButtonAtIndex:)]) {
-            [[self delegate] documentHeaderView:self didSelectButtonAtIndex:[button tag]];
-        }
+    }
+    
+    if ([[self delegate] respondsToSelector:@selector(documentHeaderView:didSelectButtonAtIndex:)]) {
+        [[self delegate] documentHeaderView:self didSelectButtonAtIndex:[button tag]];
+    }
+}
+
+- (void)toggleSpeakerNotes:(UIButton *)button {
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    ECSlidingViewController *slidingVC = (ECSlidingViewController *)[window rootViewController];
+    if ([slidingVC currentTopViewPosition] == ECSlidingViewControllerTopViewPositionCentered) {
+        [slidingVC anchorTopViewToLeftAnimated:YES];
+    } else {
+        [slidingVC resetTopViewAnimated:YES];
+    }
+}
+
+- (void)flashNextButton:(NSInteger)flashes {
+    if (flashes > 0) {
+        [UIView animateWithDuration:0.125
+                         animations:^{
+                             [[self nextButton] setAlpha:0.0];
+                             self.continueButton.alpha = 0.0;
+                         }
+                         completion:^(BOOL finished) {
+                             [UIView animateWithDuration:0.125
+                                              animations:^{
+                                                  [[self nextButton] setAlpha:1.0];
+                                                  self.continueButton.alpha = 1.0;
+                                              }
+                                              completion:^(BOOL finished) {
+                                                  [self flashNextButton:flashes-1];
+                                              }];
+                         }];
     }
 }
 

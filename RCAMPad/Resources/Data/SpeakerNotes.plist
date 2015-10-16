@@ -2,41 +2,117 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>MacroTrends</key>
+	<string>As demographics shift, trends in the foodservice industry are moving away from traditional service and menus.
+
+This app is designed to help educate persons in the foodservice industry on these emerging trends, how they impact the different segments of the foodservice industry, and suggest products and menu items that can help a restaurant enter the decision set for a specific group.
+
+For years, foodservice and retail has catered to the largest demographic segment, the Baby Boomers. As they age, their taste buds are becoming less sensitive. They are now looking for boulder flavors, revised desserts, but are more apt to eat out than to eat at home.
+
+Generation X is in full family mode. Their kids heavily influence food and meal decisions. Their older children are Generation Y.
+
+Generation Y, the Millennials, is the largest generation since the Baby Boomers. They are looking to have their values met through their choices such as local restaurants, Chipotle and Panera. They are also looking for authenticity, transparency and doing good for the environment and society.
+
+As a society, we are no longer eating at home with a scratch meal or eating out at a traditional restaurant. Choices about – from the deli set at the grocery store, Costco’s rotisserie chicken, and convenience stores carrying a greater selection of fresh food choices, the traditional market channels are blurring.
+
+Aging Baby Boomers are becoming more health conscience as they battle age and health concerns. Millennials have grown up hearing healthy food messages and trends for low-carbs and healthy snacks like yogurt. These populations are moving the market away from fad diets, and towards balanced diets. Trends such as Gluten Free and high-protein are likely to fade as protein prices increase.
+
+Food is the most commonly photographed and uploaded item on social media around the world. Flavors, foods, and preparation methods are shared and spread globally in an instant. These trends are also impacting our foodservice industry.
+
+Ultimately, the direction of foodservice industry are being driven by specific trends. These trends are referred to as macrotrends. Ventura wants to ensure our customers understand these trends and how these trends are impacting their establishment.</string>
 	<key>Millenials1</key>
-	<string>Understanding generation structure helps us to better forecast what may be on the rise in the future.
+	<string>The Millennial generation, also known as Generation Y, has perhaps the greatest influence on the direction of the foodservice industry. This macrotrend is not only a large section of our population with growing economic power, its demands depart from the traditional restaurant models.
 
-Looking at the industrial era, we could have forecasted that the social events such as WW2 would have had an impact on consumers wanting information faster – thus the penetration of televisions in the home.  With the advent and acceptance of television, it drew consumers to want more even faster and we began to leverage technology to gain information in an instant.  Smartphones and social networks have had some of the quickest adoptions by consumers due to the ability to have information in a matter of seconds and no longer do we have to wait.
+To address a generation macrotrend, you must understand the characteristics of the generation. 
 
-Generation Y is the largest population since the Boomers.  The have similar and different value systems than the group but have a strong spending power over their lifetime.  They will use these dollars to drive behavior of manufacturers and service industry based on their value systems – clear communication, authentic values, transparent manufacturing practices.  Business cannot afford to anger this group because they will walk away and spread the word quickly through their social networks.
+One characteristic of the millennials is their demand for instant information. Looking at the industrial era, we could have forecasted that the social events such as World War II would have had an impact on consumers wanting information faster. After the war –televisions became prevalent in the home. With the advent and acceptance of television, it drew consumers to want more information even faster. We began to leverage technology to gain information even faster. Today, smartphones and social networks provide consumers with the ability to have information in a matter of seconds – practically eliminating the need to wait.
 
-Generation Y is the largest population since the Boomers.  The have similar and different value systems than the group but have a strong spending power over their lifetime.  They will use these dollars to drive behavior of manufacturers and service industry based on their value systems – clear communication, authentic values, transparent manufacturing practices.  Business cannot afford to anger this group because they will walk away and spread the word quickly through their social networks. 
+This instant access to information is bleeding into other facets of life where millennials are wanting everything without the wait.</string>
+	<key>Millenials1DeepDive1</key>
+	<string>Generation Y, the Millennials, is the largest population since the Baby Boomers. A key to understanding this macrotrend is understanding where the Millennials’ value system differs from the Baby Boomers’. 
 
-By the year 2042 the Department of Labor estimates the US will be of majority Latino descent for the first time.  Millennials are leading that charge.  If you look at a microcosm of Los Angeles School District – 72% of kids k – 12 are of Latino descent.  This means that the aculturation and adoption of US values needs to be watched to determine how we provide and anticipate the needs of this new consumer.  It won’t be purely Latino but a blend of values and we need to determine which are kept and which are adopted.</string>
-	<key>Overview</key>
-	<string>Shifting Demographics:  Boomers are aging = taste buds less sensitive, bolder flavors, revising dessert, also more apt to go to eat out of home more often than the hyounger generations.
-  - Generation x:  in full family mode now, their kids influence decision heavily 
-  - Generation Y:  largest generation since Boomers, really look to have their ‘values’ met through choices such as local, Chipotle and Panera – about authenticity, transparency and doing good for all
+As the Millennials move into the work force, their economic influence is growing. This group is expected to have strong spending power over their lifetime. They will use these dollars to drive behavior of manufacturers and the service industry to meet their needs and value system. They are demanding clear communication, authentic values, and transparent manufacturing practices. Businesses cannot afford to anger this group because they will walk away and spread the word quickly through social media.</string>
+	<key>Millenials1DeepDive2</key>
+	<string>Millennials are concentrated in the western US. This is also where most food industry trends begin. 
 
-Channel blurring:  we are no longer a society of eat in the home with a scratch meal or eat out of the home at a restaurant; choices abound from the deli set at a grocery story, costco rotisserie chickens, c-stores moving into more fresh prepared (WaWa/Sheetz specifically) and gas station/express choices
+Markets most prone to Millennials are also the markets on the leading edge of these changes in the foodservice industry. Austin, TX, known for its slogan “Keep Austin Weird,” has a great culinary scene from food trucks to great BBQ to leading edge chefs.
 
-Health and wellness:  less about health and more about proactive association of what you eat is largely how you feel.  Consumers, more than every, looking to balance their diets and doing less fad dieting – trends such as Gluten Free will likely die down, high protein consumption is big right now and will likely continue until protei nprices reach a level that make it uncomfortable for consumers – with greater demand outside of the US, we can expect to see animal based protein increase
+California has large concentrations of Millennials in San Diego, Los Angeles and San Francisco. They not only are destinations for the lifestyle sought by the Millennials, they industry is being molded to cater to their preferences to gain access to their economic power.</string>
+	<key>Millenials2</key>
+	<string>As of yet, you cannot generalize the Millennials. Because a large number of Millennials are still students living at home, you must think of the Millennials as two distinct generations – the Young Millennials and the Older Millennials.
+ 
+Millennials are often described as a group of people who are interested in new foods, flavors and ethnic cuisine. That is truer for the older Millennials, but the reality is that younger Millennials are rediscovering old classics - foods that were not part of their childhood due to dietary trends of their parents. 
 
-Globalization:  the borders of the world are very loose now, due to the instant connectivity through various media sources, we are a society inflouenced by the farthest reaches of the earth.  Flavors, foods, preparation are shared in an instant.  Food is the #1 thing photographed and uploaded on social media around the world.</string>
-	<key>SegmentChoice</key>
-	<string>Due to growing up with a more diverse set of friends and introduction of more ethnic foods at a younger age, the Millennial does enjoy a broader flavor experience than other generations.  Look to provide options on the menu that highlight these notes and help to drive distinctiveness.
+With Atkins and other low-carb diets, the younger Millennials grew up without carbs. As young adults, they have discovered donuts and we are have seen the rise of independent donut shops in major metro areas such as Portland, Boston and Chicago.
 
-The overlap of smokey and bold between millennials and X’ers is an indication of why BBQ has been strong for the last few years on menus.  They both enjoy those flavors and create a ‘sweet spot’
- Japanese (tepanyaki or sushi) became popular for Xers during the growing years of Millennials.  This rich umami experience is one that has been widely embraced by the population for the combination of sweet, salty, meaty and sometimes spicy flavors. 
+Older Millennials enjoy eating out and they are willing to pay more per occasion, even if it means going out less often. This is due to their desire for a better experience with the food and the ambiance.
 
-In terms of the future, the base flavors of mexican, Italian and Chinese won’t go away but they will evolve into the regional cuisines from those cultures – look for Quoaxan from Mexico, Naeopolitan from Italian and Mandarin from Chinese.  Millennials just take it to a more authentic place.
- The battle for share of stomach is changing radically as other forms of foodservice compete directly against restaurants.
+Whether young or older, Millennials have a broader pallete due to the flavors they were introduced to earlier in their lives – yogurt (sour), soy sauce/teriyaki (umami), and peppers (heat).
 
-In particular, retailers are vying for foodservice visits with growing success. The hottest retailers, like Whole Foods or Wegmans, offer their customers an experience far beyond just gathering groceries; they even have their own ever-more-sophisticated onsite restaurants that rival the traditional restaurant sector. At Italian-style food emporium Eataly, shoppers can stroll from dinner at a traditional Neapolitan pizzeria to a dessert detour at the Nutella Bar; in between, they can watch pasta being made and buy some for tomorrow’s dinner.
+Millennials have three key elements to their make-up: digital access, a shared moral compass, and they are somewhat self-centered.
 
-Beyond retail foodservice, there are up-and-coming enterprises that deliver fresh food to consumers’ doors, like Amazon Fresh.
+They have never known a world without color television, dozens of cable channels, personal computers, Internet access, and they have experienced the introduction of Smart/touch technology when they were young. They continue to be early adopters of technology and will push the bounds and adopt early when Generation Z comes into play.
 
-Vending machines at offices and colleges feed consumer demand for higher-level convenience without compromising quality. The trend extends to hot entrées, adult beverages and even milkshakes.
-The Farmer’s Fridge offers handcrafted salads, wraps and snacks, attractively packed in distinctive Mason jars, vended from kiosks in office buildings and 7-Eleven stores in Chicago.
-Healthy vending company H.U.M.A.N. proves that vending machines can offer more than just candy and sodas. The Media Mogul includes, among other things, healthy bars, protein drinks, and fruit juices. The video screen above the vending machine displays health tips and shows the nutritional values of the products. Besides the Media Mogul, H.U.M.A.N. offers seven other healthy vending machines, including the &apos;Hot Human&apos;, with healthy warm snacks, and the &apos;Arctic Human,&apos; with healthy frozen food.</string>
+Their shared moral compass is driven mainly by events that happened early in their formative years and society’s reactions to these events. They experienced 9/11, the Gulf War and the worst recession in our history since the Great Depression. These events formed a perspective of wanting more than material things. They realize the world around them is fragile, socially and environmentally, and it is their onus to help.
+
+Why do they seem to be self-centered? They have grown up with instant access and customization. Subway puts the ingredients on right in front of you as you ask for them. Starbucks offers over 4,000 combinations with different types of milk, sweeteners, and flavors in regular and decaf. Now, as they move into adulthood, they are expecting similar customization and variety in all experiences.</string>
+	<key>Millenials2DeepDive1</key>
+	<string>The US Department of Labor estimates that by the year 2042, Americans of Latin decent will be in the majority for the first time. Millennials are leading this change.
+
+Look at a microcosm of one of the leading Millennial markets, Los Angeles, CA. In the Los Angeles School District, 72% of students Kindergarten through 12th grade are of Latin descent. This means that the acculturation and adoption of US values needs to be watched to determine how we anticipate and deliver on the needs of this new consumer. It is expected these consumers won’t be purely Latino, but a blend of values. We need to forecast which values will kept and which will be adopted.</string>
+	<key>Millenials2DeepDive2</key>
+	<string>Everyone is apt to say they are responsible to help society, but Millennials are not only more apt to state this, they are also more apt to act. This generation pays attention to companies that match their values and support the right things. Millennials demonstrate this through their support of companies like Whole Foods, Ben &amp; Jerry’s, and Panera Bread.</string>
+	<key>Millenials3</key>
+	<string>All consumers have a basic set of needs they expect to be met when dining out. These primary needs to be met to be considered part of the consumers’ decision set.
+
+The secondary needs are unique to a generation. Millennials expect customization and cravablility. They enjoy new and unique flavors they can’t get elsewhere. This sets operators apart from each other.</string>
+	<key>Millenials3DeepDive1</key>
+	<string>In this study, of all attributes measured, freshness is most likely to influence Millennials to purchase food or beverages at restaurants. This is one of the reasons convenience stores fighting for a portion of the fresh food market. Additionally, 41% of Millennials are willing to pay more for fresh foods and beverages. 
+
+The remainder of attributes shown are closely clustered. The majority of Millennials cite several other health-halo callouts such local, natural, authentic and premium as being influential in their purchasing decision. Millennials are also more likely to be influenced by callouts of antibiotic-free, free-range and organic callouts than Gen Xers or Baby Boomers. 
+
+However, about half of Millennials say they would not factor into their decision items that are gluten-free, vegan or vegetarian.</string>
+	<key>Millenials3DeepDive2</key>
+	<string>Millennials and Baby Boomers have different perspectives on the health continuum in terms of what they are looking for.
+
+Millennials want more proactive nutrition knowing that there is something ‘naturally’ not there – no pesticides, no animal protein, or no gluten. 
+
+Boomers, on the other hand, are reactive. They are looking for an absence of negatives to fit their health concerns - sugar free, fat free, cholesterol free, diet</string>
+	<key>Millenials4</key>
+	<string>Millennials are significantly more likely to rely on social media to make food and restaurant choices. They are more likely to trust reviews on Yelp or Open Table than professional reviewers and they like to pay the favor forward. Foodspotting is another web site that provides a quick way to identify restaurants in your local area that have a great food item and Chefs Feed shares where chefs are eating and what they’re ordering.
+
+The restaurant experience is extremely important to Millennials. They enjoy a social experience and are drawn to communal dining because they could meet some like-minded people. They desire ‘interesting’ flavor experiences, whether it is an authentic ethnic dish, a flavor mash up or the reinventing of a classic.</string>
+	<key>Millenials4DeepDive1</key>
+	<string>With health professional suggesting six small meals a day and the constant availability of food whenever and wherever, Millennials have rapidly adopted eating mini meals and snacks throughout the day. These mini meals and snacks are not defined as the traditional bag of chips and a soda. These snacks are simply smaller versions of food they might eat during a full meal.
+
+Millennials are most likely to say they are vegetarian, but that does not mean they strictly adhere to this diet. They are more likely to bypass animal protein a few times a week. This has driven some colleges and universities to have “Meatless Mondays.”
+
+Millennials also demand to know more about the source of their food. They look poorly upon large multinationals that they perceive to have changed or altered our food system with such items as GMOs and non-organic foods.</string>
+	<key>Millenials4DeepDive2</key>
+	<string></string>
+	<key>Millenials4DeepDive3</key>
+	<string>Millennials enjoy social media apps!
+
+88% of Twitter users are Millennials who like to follow, engage and converse in a moment’s notice. Many follow culinary leaders to see where they are eating, what they are promoting, or what they are preparing.
+
+Pinterest’s fastest growing category is food! About 11% of Pinterest boards are food-related.
+
+Food photography is the single most Tweeted and Facebooked item. About 35% of all Instagram users are Millennials and there are over 11 million photos on Instagram tagged #food.
+
+But perhaps the most important thing to know is that Millennials are using social media before they even leave your restaurant. Whether a great food experience, and even more so if the experience is bad, Millennials are posting their experience, and their recommendations, immediately.</string>
+	<key>Millenials5</key>
+	<string>Fast Casual dining has been the real winner with Millennials. Many college and university cafeterias and dining halls are picking up on these cues and offering similar experiences to students on campus meal plans.
+
+Look for non-commercial and college and university foodservice to adopt more upscale décor, enable social capabilities, provide freshly made foods in an open kitchen environment with local/regional call outs for vegetables or animal proteins that are on the menu.</string>
+	<key>Millenials5DeepDive1</key>
+	<string>The battle for share of stomach has begun, and the landscape of the battle is changing radically. New forms of foodservice are directly competing with traditional restaurants. 
+
+In particular, retailers are now vying for are vying for foodservice visits with growing success. The hottest retailers, like Whole Foods or Wegmans, are offering their customers a culinary experience far beyond just groceries. They are offering their own ever-more-sophisticated onsite restaurants that rival the traditional restaurant sector. At Italian-style food emporium Eataly, shoppers can stroll from dinner at a traditional Neapolitan pizzeria to a dessert detour at the Nutella Bar. In between, they can watch pasta being made and buy some for tomorrow’s dinner.
+
+Beyond brick-and-mortar of traditional retail and foodservice, there are up-and-coming enterprises like Amazon Fresh that deliver fresh food to the consumers’ door.
+
+Vending machines at offices and colleges feed consumer demands for higher-level convenience without compromising freshness and quality. This trend extends to hot entrées, adult beverages and even milkshakes. 
+
+As an example, The Farmer’s Fridge offers handcrafted salads, wraps and snacks, attractively packed in distinctive Mason jars, vended from kiosks in office buildings and 7-Eleven stores in Chicago. Healthy vending company H.U.M.A.N. proves that vending machines can offer more than just candy and sodas. The Media Mogul includes, among other things, healthy bars, protein drinks, and fruit juices. The video screen above the vending machine displays health tips and shows the nutritional values of the products. Besides the Media Mogul, H.U.M.A.N. offers seven other healthy vending machines, including the &apos;Hot Human&apos;, with healthy warm snacks, and the &apos;Arctic Human,&apos; with healthy frozen food.</string>
 </dict>
 </plist>
